@@ -12,4 +12,6 @@
 
 #include "actors/monsters/enemybase.dec"
 #include "actors/monsters/blushrooms.dec"
+#include "actors/monsters/slime.dec"
+#include "actors/monsters/stoni.dec"
 #include "actors/monsters/iggy.dec"

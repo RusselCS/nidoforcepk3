@@ -22,9 +22,9 @@ TNT1 A 0 A_GunFlash
 TNT1 A 0 A_JumpIfHealthLower(3, "WeakAlt")
 TNT1 A 0 A_PlaySoundEx("weapon/fireball","Weapon")  // four fireballs when healthy
 TNT1 A 1 A_SpawnItemEx("AtkFireball", 8, 0, 40, 20, 0, 7)
-TNT1 A 0 A_SpawnItemEx("AtkFireball", 8, 0, 40, 13, 0, 7)
 TNT1 A 0 A_SpawnItemEx("AtkFireball", 8, 0, 40, 17, 0, 7, 12)
-TNT1 A 0 A_SpawnItemEx("AtkFireball", 8, 0, 40, 17, 0, 7, -12)
+TNT1 A 1 A_SpawnItemEx("AtkFireball", 8, 0, 40, 17, 0, 7, -12)
+TNT1 A 0 A_SpawnItemEx("AtkFireball", 8, 0, 40, 13, 0, 7)
 TNT1 A 8
 TNT1 A 3 // slightly slower attack speed when healthy
 TNT1 A 0 A_Refire

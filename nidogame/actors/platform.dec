@@ -1,5 +1,5 @@
 actor PlayerCamera : Once {}
-actor DontMove : Powerup {powerup.duration 35}
+actor DontMove : Powerup {powerup.duration 90}
 
 actor MoveForward : CustomInventory
 {

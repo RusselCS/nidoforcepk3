@@ -50,7 +50,7 @@ Idle:
 IGGB H 1 A_Look
 wait
 See:
-IGGB H 0 A_GiveToTarget("EnableInput", 1)
+IGGB H 0 A_TakeFromTarget("DontMove", 1)
 goto Walk1
 Walk1:
 IGGB BCE 4

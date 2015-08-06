@@ -185,7 +185,7 @@ switch(garble)
 script NIDO_DEATH DEATH
 {
 Delay(60);
-ChangeLevel("NIDOHUB", 0, CHANGELEVEL_NOINTERMISSION, -1);
+ChangeLevel("IGMCB1", 0, CHANGELEVEL_NOINTERMISSION, -1);
 }
 
 script NIDO_OPEN OPEN//This script saves the number of force frags you have between worlds.

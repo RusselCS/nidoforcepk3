@@ -1,0 +1,293 @@
+// <Caprice> is it okay if i reserve 13000/13099 for props
+
+actor GreenTree 13000
+{
+//$Category NidoForce-Props
+Scale 4.0
+States
+{
+Spawn:
+TREE A -1
+Stop
+}
+}
+
+actor WeebTree 13001
+{
+//$Category NidoForce-Props
+Scale 4.0
+States
+{
+Spawn:
+TREE B -1
+Stop
+}
+}
+
+actor WhiteDandelion 13002
+{
+//$Category NidoForce-Props
+Scale 4.0
+States
+{
+Spawn:
+FLWR A -1
+Stop
+}
+}
+
+actor PinkDandelion 13003
+{
+//$Category NidoForce-Props
+Scale 4.0
+States
+{
+Spawn:
+FLWR B -1
+Stop
+}
+}
+
+actor BlueDandelion 13004
+{
+//$Category NidoForce-Props
+Scale 4.0
+States
+{
+Spawn:
+FLWR C -1
+Stop
+}
+}
+
+actor RedDandelion 13005
+{
+//$Category NidoForce-Props
+Scale 4.0
+States
+{
+Spawn:
+FLWR D -1
+Stop
+}
+}
+
+actor Rose 13006
+{
+//$Category NidoForce-Props
+Scale 4.0
+States
+{
+Spawn:
+FLWR E -1
+Stop
+}
+}
+
+actor WhatsThisAgainSorryImNotABotanist 13007
+{
+//$Category NidoForce-Props
+Scale 4.0
+States
+{
+Spawn:
+FLWR F -1
+Stop
+}
+}
+
+actor PinkThing 13008
+{
+//$Category NidoForce-Props
+Scale 4.0
+States
+{
+Spawn:
+FLWR G -1
+Stop
+}
+}
+
+actor RedThing 13009
+{
+//$Category NidoForce-Props
+Scale 4.0
+States
+{
+Spawn:
+FLWR H -1
+Stop
+}
+}
+
+actor WhiteThing 13010
+{
+//$Category NidoForce-Props
+Scale 4.0
+States
+{
+Spawn:
+FLWR I -1
+Stop
+}
+}
+
+actor WhiteRose 13011
+{
+//$Category NidoForce-Props
+Scale 4.0
+States
+{
+Spawn:
+FLWR J -1
+Stop
+}
+}
+
+actor LargeBush 13012
+{
+//$Category NidoForce-Props
+Scale 4.0
+States
+{
+Spawn:
+SHRB A -1
+Stop
+}
+}
+
+actor MediumBushA 13013
+{
+//$Category NidoForce-Props
+Scale 4.0
+States
+{
+Spawn:
+SHRB B -1
+Stop
+}
+}
+
+actor MediumBushB 13014
+{
+//$Category NidoForce-Props
+Scale 4.0
+States
+{
+Spawn:
+SHRB D -1
+Stop
+}
+}
+
+actor SmallBush 13015
+{
+//$Category NidoForce-Props
+Scale 4.0
+States
+{
+Spawn:
+SHRB C -1
+Stop
+}
+}
+
+actor BigCactus 13016
+{
+//$Category NidoForce-Props
+Scale 4.0
+States
+{
+Spawn:
+CACT A -1
+Stop
+}
+}
+
+actor SmallCactus 13017
+{
+//$Category NidoForce-Props
+Scale 4.0
+States
+{
+Spawn:
+CACT B -1
+Stop
+}
+}
+
+actor BoulderA 13018
+{
+//$Category NidoForce-Props
+Scale 4.0
+States
+{
+Spawn:
+ROCK A -1
+Stop
+}
+}
+
+actor BoulderB 13019
+{
+//$Category NidoForce-Props
+Scale 4.0
+States
+{
+Spawn:
+ROCK D -1
+Stop
+}
+}
+
+actor RockA 13020
+{
+//$Category NidoForce-Props
+Scale 4.0
+States
+{
+Spawn:
+ROCK B -1
+Stop
+}
+}
+
+actor RockB 13021
+{
+//$Category NidoForce-Props
+Scale 4.0
+States
+{
+Spawn:
+ROCK B -1
+Stop
+}
+}
+
+actor StalactiteA 13022
+{
+//$Category NidoForce-Props
+Scale 4.0
++SPAWNCEILING
++NOGRAVITY
+States
+{
+Spawn:
+STAL A -1
+Stop
+}
+}
+
+actor StalactiteB 13023
+{
+//$Category NidoForce-Props
+Scale 4.0
++SPAWNCEILING
++NOGRAVITY
+States
+{
+Spawn:
+STAL B -1
+Stop
+}
+}

@@ -1,0 +1,128 @@
+actor BlushroomSoprano 12000
+{
+//$Category NidoForce-Monsters
+MONSTER
++NOBLOOD
+Species "Enemy"
+DamageFactor "EnemyRadius", 0.0
+Health 3
+Speed 0
+Painchance 0
+Mass 100
+Height 56
+Radius 20
+Scale 4.0
+States
+{
+Spawn:
+SMUS A 0
+SMUS A 0 ACS_ExecuteAlways(NIDO_ENEMY, 0, 0, 10, 0)
+Goto Idle
+Idle:
+SMUS BB 10 A_Wander
+SMUS A 0 A_LookEx(0, 0, 512, 512, 360, "See")
+SMUS CC 10 A_Wander
+SMUS A 0 A_LookEx(0, 0, 512, 512, 360, "See")
+loop
+Reset:
+SMUS A 0 A_Stop
+SMUS A 0 A_ChangeFlag(FLOORHUGGER, 1)
+SMUS A 1 A_ClearTarget
+SMUS A 0 A_ChangeFlag(FLOORHUGGER, 0)
+SMUS A 0 A_TakeInventory("Counter", 999)
+Goto Idle
+See:
+SMUS AAAA 3 A_Chase
+loop
+Missile:
+SMUS G 0 A_JumpIfCloser(256, "Hop")
+SMUS G 0 A_CustomMissile("BlushroomSpore", 32, 0, angle+20, CMF_ABSOLUTEANGLE|CMF_ABSOLUTEPITCH, 0)
+SMUS G 0 A_CustomMissile("BlushroomSpore", 32, 0, angle-20, CMF_ABSOLUTEANGLE|CMF_ABSOLUTEPITCH, 0)
+SMUS G 0 A_CustomMissile("BlushroomSpore", 32, 0, angle, CMF_ABSOLUTEANGLE|CMF_ABSOLUTEPITCH, 0)
+SMUS EDE 3 A_FaceTarget
+Goto See
+Hop:
+SMUS AE 3
+SMUS B 0 ThrustThingZ(0, 40, 0, 0)
+SMUS B 0 A_FaceTarget
+SMUS B 0 A_Recoil(-8)
+SMUS B 0 A_GiveInventory("Counter", 1)
+SMUS DDDDDD 1 A_SpawnItemEx("EnemyRadius", 0, 0, 0, momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM)
+SMUS B 0 A_CheckFloor("Reset")
+SMUS B 0 A_JumpIfInventory("Counter", 35, "Reset")
+Goto Hop+5
+Pain:
+SMUS A 0
+Goto See
+Death:
+SMUS A 0 A_SpawnItemEx("EnemyPoof", 0, 0, 32)
+Stop
+}
+}
+
+actor BlushroomSpore
+{
+PROJECTILE
+Damage (1)
+Speed 7
+Height 5
+Radius 2
+Scale 4.0
+States
+{
+Spawn:
+SMUS FG 4
+loop
+}
+}
+
+actor BlushroomSpore2 : BlushroomSpore
+{
+Speed 12
+}
+
+actor BlushroomAlto 12001
+{
+//$Category NidoForce-Monsters
+MONSTER
++MISSILEMORE
++NOBLOOD
+Species "Enemy"
+DamageFactor "EnemyRadius", 0.0
+Health 3
+Speed 0
+Painchance 0
+Mass 100
+Height 56
+Radius 20
+Scale 4.0
+States
+{
+Spawn:
+TMUS A 0
+TMUS A 0 ACS_ExecuteAlways(NIDO_ENEMY, 0, 0, 10, 0)
+Goto Idle
+Idle:
+TMUS AA 10 A_Wander
+TMUS A 0 A_LookEx(0, 0, 512, 512, 360, "See")
+loop
+See:
+TMUS AAAA 3 A_Chase
+loop
+Missile:
+TMUS AC 4 A_FaceTarget
+TMUS G 0 A_CustomMissile("BlushroomSpore2", 32, 0, angle, CMF_ABSOLUTEANGLE|CMF_ABSOLUTEPITCH, 0)
+TMUS BC 4
+TMUS G 0 A_CustomMissile("BlushroomSpore2", 32, 0, angle, CMF_ABSOLUTEANGLE|CMF_ABSOLUTEPITCH, 0)
+TMUS DC 4
+TMUS G 0 A_CustomMissile("BlushroomSpore2", 32, 0, angle, CMF_ABSOLUTEANGLE|CMF_ABSOLUTEPITCH, 0)
+TMUS BCDCBCA 10
+Goto See
+Pain:
+TMUS A 0
+Goto See
+Death:
+TMUS A 0 A_SpawnItemEx("EnemyPoof", 0, 0, 32)
+Stop
+}
+}

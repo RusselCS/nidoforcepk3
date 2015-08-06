@@ -1,0 +1,93 @@
+height 0;
+resolution 200, 125;
+
+statusbar fullscreen, forcescaled
+	{
+	DrawImage "NIDOICO", 3, 3;
+	
+	IsSelected not NidoOmegaWep
+		{
+		DrawBar "HP5FULL", "HP5EMPT", Health, horizontal, 14, 4;
+		DrawBar "MP4FULL", "MP4EMPT", Cell, horizontal, 13, 12;
+		}
+	IsSelected NidoOmegaWep
+		{
+		DrawBar "HP6FULL", "HP6EMPT", Health, horizontal, 12, 4;
+		DrawBar "MP4FULL", "MP4EMPT", Cell, horizontal, 11, 12;
+		}
+	
+	InInventory not InHubMap
+		{
+		DrawImage "EFRAG", 159, 107;
+		DrawImage "EFRAG", 172, 107;
+		DrawImage "EFRAG", 185, 107;
+		
+		InInventory ForceStock1	{DrawImage "GFRAG1", 159, 107;}
+		InInventory ForceStock2	{DrawImage "GFRAG1", 172, 107;}
+		InInventory ForceStock3 {DrawImage "GFRAG1", 185, 107;}
+		
+		// [Lego] HUD animations are...special to say the least.
+		// Basically because ANIMDEFS happens globally, gotta animate this manually
+		// Last frame is placed on the HUD first since it lasts the longest
+		// Earlier frames are layered on top of it to give the appearance of change
+		InInventory ForceStock1Frame4 {DrawImage "GFRAG4", 159, 107;}
+		InInventory ForceStock1Frame3 {DrawImage "GFRAG3", 159, 107;}
+		InInventory ForceStock1Frame2 {DrawImage "GFRAG2", 159, 107;}
+		InInventory ForceStock1Frame1 {DrawImage "GFRAG1", 159, 107;}
+		
+		InInventory ForceStock2Frame4 {DrawImage "GFRAG4", 172, 107;}
+		InInventory ForceStock2Frame3 {DrawImage "GFRAG3", 172, 107;}
+		InInventory ForceStock2Frame2 {DrawImage "GFRAG2", 172, 107;}
+		InInventory ForceStock2Frame1 {DrawImage "GFRAG1", 172, 107;}
+		
+		InInventory ForceStock3Frame4 {DrawImage "GFRAG4", 185, 107;}
+		InInventory ForceStock3Frame3 {DrawImage "GFRAG3", 185, 107;}
+		InInventory ForceStock3Frame2 {DrawImage "GFRAG2", 185, 107;}
+		InInventory ForceStock3Frame1 {DrawImage "GFRAG1", 185, 107;}
+		}
+	InInventory InHubMap
+		{
+		DrawImage "GFRAG1", 159, 107;
+		
+		InInventory not ForceFragStock, 10
+			{
+			DrawImage "FCNBK0", 173, 110;
+			}
+		DrawNumber 2, FRAGFONT, untranslated, ForceFragStock, 196, 107, 1;
+		
+		//You can still collect frag on "hub" maps, such as the Iggy battle rooms.
+		InInventory ForceStock1Frame4 {DrawImage "GFRAG4", 159, 107;}
+		InInventory ForceStock1Frame3 {DrawImage "GFRAG3", 159, 107;}
+		InInventory ForceStock1Frame2 {DrawImage "GFRAG2", 159, 107;}
+		InInventory ForceStock1Frame1 {DrawImage "GFRAG1", 159, 107;}
+		InInventory ForceStock2Frame4 {DrawImage "GFRAG4", 159, 107;}
+		InInventory ForceStock2Frame3 {DrawImage "GFRAG3", 159, 107;}
+		InInventory ForceStock2Frame2 {DrawImage "GFRAG2", 159, 107;}
+		InInventory ForceStock2Frame1 {DrawImage "GFRAG1", 159, 107;}
+		InInventory ForceStock3Frame4 {DrawImage "GFRAG4", 159, 107;}
+		InInventory ForceStock3Frame3 {DrawImage "GFRAG3", 159, 107;}
+		InInventory ForceStock3Frame2 {DrawImage "GFRAG2", 159, 107;}
+		InInventory ForceStock3Frame1 {DrawImage "GFRAG1", 159, 107;}
+		}
+	InInventory InBossBattle
+		{
+		DrawBar "BHP5FULL", "BHP5EMPT", BossHealth1, horizontal, reverse, 148, 4;
+		DrawImage "IGGYICO", 189, 4;
+		}
+	}
+
+statusbar normal, forcescaled
+{
+	DrawImage "NIDOICO", 0, 3;
+	
+	IsSelected not NidoOmegaWep
+		{
+		DrawBar "HP5FULL", "HP5EMPT", Health, horizontal, 10, 4;
+		DrawBar "MP4FULL", "MP4EMPT", Cell, horizontal, 9, 12;
+		}
+	IsSelected NidoOmegaWep
+		{
+		DrawBar "HP6FULL", "HP6EMPT", Health, horizontal, 10, 4;
+		DrawBar "MP4FULL", "MP4EMPT", Cell, horizontal, 9, 12;
+		}
+}

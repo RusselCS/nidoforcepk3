@@ -1,0 +1,90 @@
+actor SwordBase : Weapon
+{
+Weapon.AmmoUse 1
+Weapon.AmmoGive 1
+Weapon.SlotNumber 1
+Inventory.Pickupmessage "Picked up an old sword."
+Obituary "%o was cut down by %k's blade."
+weapon.ammotype "CapacityPower"
++WEAPON.AMMO_OPTIONAL
++WEAPON.NOAUTOFIRE
+States
+{
+Spawn:
+TNT1 A 1
+stop
+Ready:
+TNT1 A 1 A_WeaponReady
+Goto Ready
+Deselect:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+TNT1 A 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+TNT1 A 1 A_Raise
+Loop
+Fire:
+TNT1 A 1 A_ScaleVelocity(0.5)
+TNT1 A 0 A_PlaySoundEx("weapon/slash1","Weapon")
+TNT1 A 0 A_SpawnItemEx("AtkSword", 60, 0, 40, 0, 0, 0)
+TNT1 A 0 A_SpawnItemEx("GfxSword", 60, 0, 40, 0, 0, 0)
+TNT1 A 9 A_ScaleVelocity(0.8)
+TNT1 A 0 A_Refire
+Goto Ready
+Hold:
+TNT1 A 1
+TNT1 A 0 A_Refire
+Goto Ready
+}
+}
+
+actor CapacityPower : Ammo
+{
+inventory.amount 1
+inventory.maxamount 3
+}
+
+actor CapacityPowerAlpha : Ammo
+{
+inventory.amount 1
+inventory.maxamount 5
+}
+
+actor AtkSword
+{
+PROJECTILE
+Radius 10
+Height 20
+scale 4.0
++LOOKALLAROUND
++SKYEXPLODE
++DONTBLAST
+speed 0
+damage (1)
+States
+{
+Spawn:
+TNT1 A 3
+Death:
+TNT1 A 0
+TNT1 A 1
+stop
+}
+}
+
+actor GfxSword : AtkSword
+{
++RIPPER
++NOINTERACTION
+damage (0)
+States
+{
+Spawn:
+ATSW ABCCDE 1
+Death:
+TNT1 A 0
+TNT1 A 1
+stop
+}
+}

@@ -1,0 +1,21 @@
+[enu default]
+
+QUITMSG = "Are you sure you want to quit?";
+TXT_YES = "Aye";
+TXT_NO = "Nay";
+
+QUITMSG1 = "Bleb.";
+QUITMSG2 = "Bleb.";
+QUITMSG3 = "Bleb.";
+QUITMSG4 = "Bleb.";
+QUITMSG5 = "Bleb.";
+QUITMSG6 = "Bleb.";
+QUITMSG7 = "Bleb.";
+
+QUITMSG8 = "Bleb.";
+QUITMSG9 = "Bleb.";
+QUITMSG10 = "Bleb.";
+QUITMSG11 = "Bleb.";
+QUITMSG12 = "Bleb.";
+QUITMSG13 = "Bleb.";
+QUITMSG14 = "Bleb.";

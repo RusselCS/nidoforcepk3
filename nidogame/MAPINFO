@@ -1,0 +1,17 @@
+// [Lego] So fun fact.
+// Apparently you need to have wad names be the same as the map code to get the
+// map working in the maps folder
+// fucking THANKS
+clearepisodes
+episode IGMCB1
+{
+name = "Test Map"
+}
+
+clearskills
+skill normal
+{
+	name = "You shouldn't see this"
+	spawnfilter = 1
+	ACSReturn  = 0
+}

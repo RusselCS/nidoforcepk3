@@ -1,0 +1,237 @@
+// [Lego] This is a general ACS file for different things that aren't related to
+// the base platform engine.
+// So here, have a health system.
+#include "gcommon.acs"
+#library "nidosys"
+
+#DEFINE NIDO_ENTER 900
+#DEFINE NIDO_RESPAWN 901
+#DEFINE NIDO_ENEMY 902
+#DEFINE NIDO_STATUS 903
+#DEFINE NIDO_DEATH 904
+#DEFINE NIDO_OPEN 905
+
+#DEFINE STATUS_MAXHEALTH 1
+#DEFINE STATUS_HEAL 2
+#DEFINE STATUS_HEALCHECK 3
+#DEFINE STATUS_DISABLEINPUT 4
+
+world int 1: World1Frags;
+world int 2: World2Frags;
+world int 3: World3Frags;
+world int 4: World4Frags;
+world int 5: World5Frags;
+world int 6: World6Frags;
+
+global int 1: TotalFrags;
+global int 2: Iggy1Frag;
+global int 3: Iggy2Frag;
+
+script NIDO_ENTER ENTER
+{
+int health = GetActorProperty(0, APROP_HEALTH);
+SetPlayerProperty(0, 1, PROP_BUDDHA);
+
+int damageanim = 0;
+int invulntimer = 0;
+int stylemode = false;
+
+while(GetActorProperty(0, APROP_HEALTH)>0)
+	{
+	if(health!=GetActorProperty(0, APROP_HEALTH))
+		{
+		if(health>GetActorProperty(0, APROP_HEALTH) && 
+			GetActorProperty(0, APROP_HEALTH)!=GetActorProperty(0, APROP_SPAWNHEALTH))
+			{// [Lego] You were damaged.
+			damageanim = 2;
+			}
+			
+		health = GetActorProperty(0, APROP_HEALTH);
+		if(health==1)
+			SetPlayerProperty(0, 0, PROP_BUDDHA);
+		else
+			SetPlayerProperty(0, 1, PROP_BUDDHA);
+		}
+	
+	if(damageanim>0)
+		{
+		if(damageanim==2)
+			{
+			FadeTo(192, 192, 192, 0.30, 0.0);
+			FadeTo(192, 192, 192, 0.0, 0.1);
+			damageanim=1;
+			invulntimer=21;
+			stylemode = false;
+			SetPlayerProperty(0, 1, PROP_INVULNERABILITY);
+			}
+		else if(damageanim==1)
+			{
+			if(invulntimer>0)
+				{
+				if(invulntimer%3==0)
+					stylemode = !stylemode;
+
+				if(stylemode)
+					SetActorProperty(0, APROP_RENDERSTYLE, STYLE_SHADOW);
+				else
+					SetActorProperty(0, APROP_RENDERSTYLE, STYLE_ADD);
+
+				invulntimer--;
+				}
+			else
+				damageanim=0;
+			}
+		}
+	else
+		{
+		SetActorProperty(0, APROP_RENDERSTYLE, STYLE_NORMAL);
+		SetPlayerProperty(0, 0, PROP_INVULNERABILITY);
+		}
+	Delay(1);
+	}
+SetActorProperty(0, APROP_RENDERSTYLE, STYLE_NORMAL);
+}
+
+script NIDO_RESPAWN RESPAWN
+{
+ACS_ExecuteAlways(NIDO_ENTER, 0);
+}
+
+script NIDO_ENEMY (int invuln, int time, int contact)
+{
+int health = GetActorProperty(0, APROP_HEALTH);
+int frametimer = 0;
+bool stylemode = false;
+while(GetActorProperty(0, APROP_HEALTH)>0)
+	{
+	if(health!=GetActorProperty(0, APROP_HEALTH))
+		{
+		if(health>GetActorProperty(0, APROP_HEALTH))
+			{
+			frametimer = time;
+			if(invuln)SetActorProperty(0, APROP_INVULNERABLE, true);
+			}
+		health = GetActorProperty(0, APROP_HEALTH);
+		}
+
+	if(frametimer>0)
+		{
+		if(frametimer==time)
+			stylemode = false;
+		if(frametimer%3==0)
+			stylemode = !stylemode;
+
+		if(stylemode)
+			SetActorProperty(0, APROP_RENDERSTYLE, STYLE_SHADOW);
+		else
+			SetActorProperty(0, APROP_RENDERSTYLE, STYLE_ADD);
+
+		frametimer--;
+		}
+	else
+		{
+		SetActorProperty(0, APROP_RENDERSTYLE, STYLE_NORMAL);
+		if(invuln)SetActorProperty(0, APROP_INVULNERABLE, false);
+		}
+	
+	if(contact==1)
+		SpawnSpotForced("EnemyRadius", 0, 0, 0);
+	
+	Delay(1);
+	}
+SetActorProperty(0, APROP_RENDERSTYLE, STYLE_NORMAL);
+}
+
+script NIDO_STATUS (int garble, int num)
+{
+switch(garble)
+	{
+	Case STATUS_MAXHEALTH:
+	SetActorProperty(0, APROP_SPAWNHEALTH, num);
+	if(GetActorProperty(0, APROP_HEALTH)>num)
+		{
+		SetActorProperty(0, APROP_HEALTH, num);
+		}
+	Break;
+	
+	// [Lego] Uncertainty leads to bugs. Better to supply too much for 
+	// a simple issue than to create new issues entirely.
+	Case STATUS_HEAL:
+	int max = GetActorProperty(0, APROP_SPAWNHEALTH);
+	int amt = GetActorProperty(0, APROP_HEALTH);
+	if(max>amt)
+		{
+		SetActorProperty(0, APROP_HEALTH, amt+1);
+		}
+	Break;
+	
+	Case STATUS_HEALCHECK:
+	if(GetActorProperty(0, APROP_SPAWNHEALTH)>GetActorProperty(0, APROP_HEALTH))
+		{
+		SetResultValue(TRUE);
+		}
+	else
+		{
+		SetResultValue(FALSE);
+		}
+	Break;
+	
+	Case STATUS_DISABLEINPUT:
+	SetInputLock(num);
+	Break;
+	}
+}
+
+script NIDO_DEATH DEATH
+{
+Delay(60);
+ChangeLevel("NIDOHUB", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}
+
+script NIDO_OPEN OPEN//This script saves the number of force frags you have between worlds.
+{
+Delay(5);
+if(CheckActorInventory(1000, "ForceFrag1")>=World1Frags)
+	World1Frags = CheckActorInventory(1000, "ForceFrag1");
+else
+	setActorInventory(1000, "ForceFrag1", World1Frags);
+
+if(CheckActorInventory(1000, "ForceFrag2")>World2Frags)
+	World2Frags = CheckActorInventory(1000, "ForceFrag2");
+else
+	setActorInventory(1000, "ForceFrag2", World2Frags);
+	
+if(CheckActorInventory(1000, "ForceFrag3")>World3Frags)
+	World3Frags = CheckActorInventory(1000, "ForceFrag3");
+else
+	setActorInventory(1000, "ForceFrag3", World3Frags);
+	
+if(CheckActorInventory(1000, "ForceFrag4")>World4Frags)
+	World4Frags = CheckActorInventory(1000, "ForceFrag4");
+else
+	setActorInventory(1000, "ForceFrag4", World4Frags);
+	
+if(CheckActorInventory(1000, "ForceFrag5")>World5Frags)
+	World5Frags = CheckActorInventory(1000, "ForceFrag5");
+else
+	setActorInventory(1000, "ForceFrag5", World5Frags);
+
+if(CheckActorInventory(1000, "ForceFrag6")>World6Frags)
+	World6Frags = CheckActorInventory(1000, "ForceFrag6");
+else
+	setActorInventory(1000, "ForceFrag6", World6Frags);
+	
+if(CheckActorInventory(1000, "ForceFragStock")>TotalFrags)
+	TotalFrags = CheckActorInventory(1000, "ForceFragStock");
+else
+	setActorInventory(1000, "ForceFragStock", TotalFrags);
+}
+
+function void setActorInventory(int tid, str name, int amount)
+{
+int count = CheckActorInventory(tid, name);
+if(amount>count)
+	GiveActorInventory(tid, name, amount-count);
+else if(amount<count)
+	TakeActorInventory(tid, name, count-amount);
+}

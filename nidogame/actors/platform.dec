@@ -1,0 +1,78 @@
+actor PlayerCamera : Once {}
+actor DontMove : Powerup {powerup.duration 90}
+
+actor MoveForward : CustomInventory
+{
++INVENTORY.AUTOACTIVATE
+States
+{
+Use:
+TNT1 A 0 A_ChangeVelocity(1.35, 0, 0, CVF_RELATIVE)
+stop
+}
+}
+
+actor MoveSlow : CustomInventory
+{
++INVENTORY.AUTOACTIVATE
+States
+{
+Use:
+TNT1 A 0 A_ChangeVelocity(1.25, 0, 0, CVF_RELATIVE)
+stop
+}
+}
+
+actor CameraPositionCheck
+{
++NOGRAVITY
+-SOLID
++NOBLOCKMONST
+Height 1
+Radius 1
+States
+{
+Spawn:
+TNT1 A 9
+stop
+}
+}
+
+actor CameraActor
+{
++NOINTERACTION
++NOBLOCKMONST
++THRUACTORS
++NOGRAVITY
++NOTELEPORT
+Radius 0
+Height 0
+States
+{
+Spawn:
+TNT1 A 1
+loop
+}
+}
+
+actor DisableInput : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0
+TNT1 A 0 ACS_ExecuteAlways(NIDO_STATUS, 0, STATUS_DISABLEINPUT, 1)
+stop
+}
+}
+
+actor EnableInput : Custominventory
+{
+States
+{
+Pickup:
+TNT1 A 0
+TNT1 A 0 ACS_ExecuteAlways(NIDO_STATUS, 0, STATUS_DISABLEINPUT, 0)
+stop
+}
+}

@@ -1,0 +1,15 @@
+#include "actors/definitions.dec"
+
+#include "actors/weapons/swordbase.dec"
+#include "actors/weapons/nidoalpha.dec"
+#include "actors/weapons/nidobeta.dec"
+#include "actors/weapons/nidoomega.dec"
+
+#include "actors/player.dec"
+#include "actors/platform.dec"
+#include "actors/props.dec"
+#include "actors/pickups.dec"
+
+#include "actors/monsters/enemybase.dec"
+#include "actors/monsters/blushrooms.dec"
+#include "actors/monsters/iggy.dec"

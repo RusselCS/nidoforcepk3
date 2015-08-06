@@ -1,0 +1,13 @@
+pickup/health		HPGET
+pickup/capacity		CPGET
+pickup/weapon		WEPGET
+
+menu/activate		MOPEN
+menu/backup			MOPEN
+menu/prompt			MOPEN
+menu/cursor			MCURS
+menu/change			MCURS
+menu/invalid		MCLOS
+menu/dismiss		MCLOS
+menu/choose			MOPEN
+menu/clear			MCLOS

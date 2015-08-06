@@ -1,0 +1,419 @@
+// [LegoCS] Licence this however you do, I don't know how licenses work.
+// I am LegoCS aka Russel aka Micah West. All the code in this file was written by
+// yours truly, same with all the comments.
+
+#include "gcommon.acs"
+#library "platform"
+
+#DEFINE PLAT_ENTER 800
+#DEFINE PLAT_RESPAWN 801
+#DEFINE PLAT_CAMMOVE 802
+#DEFINE PLAT_OPEN 803
+
+int campos = 0;
+int directions[8] = 
+{0.125, 0.25, 0.375, 0.5, 
+0.625, 0.75, 0.875, 1.0};
+
+script PLAT_ENTER ENTER
+{
+int pln = PlayerNumber();
+int tid = pln+1000;
+int ctid = tid+1000;
+Thing_ChangeTID(0, tid);
+GiveInventory("PlayerCamera", 1);
+
+int ended = 0;
+
+int Buttons = 0;
+int oldButtons = 0;
+int walking = 0;
+int turnPressed = false;
+int hasJumped = 0;
+int releasedJump = 0;
+int airtime = 0;
+int floattime = 0;
+int landed = 0;
+
+campos = GetLevelInfo(LEVELINFO_PAR_TIME);
+
+SetCamera(256.0, 103.0, ctid, directions[addLimit(campos,1,8)], 0.07);
+int angle = GetActorAngle(0);
+int stick_y = GetPlayerInput(-1, MODINPUT_FORWARDMOVE);
+int stick_x = GetPlayerInput(-1, MODINPUT_SIDEMOVE);
+int stick_yaw = GetPlayerInput(-1, MODINPUT_YAW);
+while(!ended)
+	{
+	oldButtons = Buttons;
+	Buttons = GetPlayerInput(-1, INPUT_BUTTONS);
+	stick_y = GetPlayerInput(-1, MODINPUT_FORWARDMOVE);
+	stick_x = GetPlayerInput(-1, MODINPUT_SIDEMOVE);
+	stick_yaw = GetPlayerInput(-1, MODINPUT_YAW);
+	
+	//Yeah, I'm a pessimist. What of it.
+	ended = !CheckInventory("PlayerCamera")>0 ||
+			PlayerNumber()==-1 ||
+			GetActorProperty(0, APROP_HEALTH)<=0;
+	
+	//It checks the reverse first for readability.
+	//This block is more important, so it's presented first.
+	if(!ended)
+		{
+		//Movement stuff.
+		//Ya press buttons and things happen! :0
+		bool moving = false;
+		if(Buttons & BT_MOVELEFT)
+			{
+			if(Buttons & BT_FORWARD)
+				{
+				if(CheckInventory("DontMove")==0)
+					angle = directions[addLimit(campos, 2, 8)];
+				}
+			else if(Buttons & BT_BACK)
+				{
+				if(CheckInventory("DontMove")==0)
+					angle = directions[addLimit(campos, 4, 8)];
+				}
+			else
+				if(CheckInventory("DontMove")==0)
+					angle = directions[addLimit(campos, 3, 8)];
+				
+			moving = true;
+			}
+		else if(Buttons & BT_MOVERIGHT)
+			{
+			if(Buttons & BT_FORWARD)
+				{
+				if(CheckInventory("DontMove")==0)
+					angle = directions[addLimit(campos, 0, 8)];
+				}
+			else if(Buttons & BT_BACK || stick_y < -3200)
+				{
+				if(CheckInventory("DontMove")==0)
+					angle = directions[addLimit(campos, 6, 8)];
+				}
+			else
+				if(CheckInventory("DontMove")==0)
+					angle = directions[addLimit(campos, 7, 8)];
+
+			moving = true;
+			}
+		else if(Buttons & BT_FORWARD)
+			{
+			if(CheckInventory("DontMove")==0)
+				angle = directions[addLimit(campos, 1, 8)];
+			moving = true;
+			}
+		else if(Buttons & BT_BACK)
+			{
+			if(CheckInventory("DontMove")==0)
+				angle = directions[addLimit(campos, 5, 8)];
+			moving = true;
+			}
+		
+		//Stick inputs are fun
+		if(abs(stick_y) > 3200 || abs(stick_x) > 3200)
+			{
+			if(CheckInventory("DontMove")==0)
+				angle = VectorAngle(stick_x, stick_y)+directions[addLimit(campos, 7, 8)];
+			moving = true;
+			}
+			
+		if(Buttons & BT_JUMP)
+			{
+			if(CheckInventory("DontMove")==0)
+				{
+				if(hasJumped<4)
+					{
+					if(hasJumped==0 && GetUserVariable(tid, "user_jumping")==0)
+						{//Short hop
+						ThrustThingZ(0, 40, 0, 0);
+						}
+					if(hasJumped==3 && airtime<6 && releasedJump==0)
+						{//Full hop
+						ThrustThingZ(0, 20, 0, 1);
+						}
+					hasJumped++;
+					}
+				if(releasedJump && CheckInventory("NidoFloatJump")>0)//Floating
+					{
+					if(GetActorVelZ(0)<0)
+						{
+						SetUserVariable(tid, "user_float", 1);
+						SetActorVelocity(0, GetActorVelX(0), GetActorVelY(0), FixedMul(GetActorVelZ(0), min(0.4 + floattime*0.005, 0.9)), false, false);
+						if(floattime==0)
+							{
+							ThrustThingZ(0, 0, 0, 0);
+							}
+						floattime++;
+						}
+					}
+				}
+			}
+		else
+			{
+			hasJumped = 0;
+			releasedJump = true;
+			SetUserVariable(tid, "user_float", 0);
+			}
+			
+		if(Buttons & BT_LEFT || stick_yaw > 640)
+			{
+			if(turnPressed==false)
+				{
+				if(campos<=0)
+					{
+					campos=7;
+					}
+				else campos--;
+				turnPressed=true;
+				}
+			}
+		else if(Buttons & BT_RIGHT || stick_yaw < -640)
+			{
+			if(turnPressed==false)
+				{
+				if(campos>=7)
+					{
+					campos=0;
+					}
+				else campos++;
+				turnPressed=true;
+				}
+			}
+		else
+			{
+			turnPressed=false;
+			}
+			
+		if(buttons & BT_ALTATTACK)
+			SetUserVariable(tid, "user_magic", 1);
+		else
+			SetUserVariable(tid, "user_magic", 0);
+		
+		SetActorAngle(0, angle);
+		SetActorPitch(0, 0);
+		if(moving && CheckInventory("DontMove")==0)
+			{
+			if(GetActorProperty(0, APROP_HEALTH)>1)
+				GiveInventory("MoveForward", 1);
+			else
+				GiveInventory("MoveSlow", 1);
+
+			SetUserVariable(tid, "user_moving", 1);
+			walking = true;
+			}
+		else
+			{
+			if(walking)
+				{
+				SetUserVariable(tid, "user_moving", 0);
+				walking = false;
+				}
+			}
+		}
+	else
+		{
+		if (ThingCount(0, ctid)) { Thing_Remove(ctid); }
+		}
+	if(GetActorVelZ(0)==0)
+		landed++;
+	else
+		landed = 0;
+	
+	if(GetActorZ(0)-GetActorFloorZ(0)>0 && landed<3)
+		{
+		SetUserVariable(tid, "user_jumping", 1);
+		airtime++;
+		}
+	else
+		{
+		SetUserVariable(tid, "user_jumping", 0);
+		SetUserVariable(tid, "user_float", 0);
+		releasedJump = 0;
+		airtime=0;
+		floattime=0;
+		}
+		
+
+	Delay(1);
+	}
+}
+
+function int tan(int angle)
+{
+return FixedDiv(sin(angle), cos(angle));
+}
+
+function int min(int x, int y)
+{
+if(x>y)return y;
+return x;
+}
+
+function int abs(int x)
+{
+if(x<0)return -x;
+return x;
+}
+
+script PLAT_RESPAWN RESPAWN
+{
+ACS_ExecuteAlways(PLAT_ENTER, 0);
+}
+
+function void SetCamera(int radius, int height, int tid, int angle, int pitch)
+{
+int x = GetActorX(0);
+int y = GetActorY(0);
+int z = GetActorZ(0);
+
+if(ThingCount(T_NONE, tid)==0)
+	SpawnForced("CameraActor", x+FixedMul(-cos(angle),radius), y+FixedMul(-sin(angle),radius), z+height+41.0, tid, 64);
+
+int vx = GetActorVelX(0);
+int vy = GetActorVelY(0);
+int vz = GetActorVelZ(0);
+
+SetActorPosition(tid, x+FixedMul(-cos(angle),radius), y+FixedMul(-sin(angle),radius), z+height+41.0, 0);
+SetActorVelocity(tid, vx, vy, vz, false, 0);
+SetActorAngle(tid, angle);
+SetActorPitch(tid, pitch);
+ChangeCamera(tid, 0, 0);
+
+ACS_ExecuteAlways(PLAT_CAMMOVE, 0, tid, radius, height);
+}
+
+function int addLimit(int x, int y, int max)
+{
+if(x+y<max)return x+y;
+int r = x+y-max;
+while(r>max)r-=max;
+return r;
+}
+
+script PLAT_CAMMOVE (int tid, int radius, int height)
+{
+SetActivator(tid);
+int owner = tid-1000;
+
+int resettimer = 0;
+int oldPos = campos;
+int angle = 0;
+int diff = 0;
+int sign = 0;
+bool turning = false;
+
+while(CheckActorInventory(owner, "PlayerCamera")>0 && GetActorProperty(owner, APROP_HEALTH)>0)
+	{
+	//Camera angle swaps.
+	if(campos!=oldPos)
+		{
+		resettimer = 3;
+		turning = true;
+		int fuck = campos-oldpos;
+		if(fuck>1 || fuck<-1)
+			fuck = oldpos-campos;
+		
+		sign = dynamic(fuck);
+		oldPos = campos;
+		}
+	if(resettimer>-1)
+		{
+		diff=sign*0.125/4;
+		diff*=resettimer;
+		angle=directions[addLimit(camPos,1,8)]-diff;
+		}
+	else
+		{
+		angle = directions[addLimit(campos,1,8)];
+		turning = false;
+		}
+	
+	int dx;// = GetActorX(owner)+(FixedMul(-cos(directions[addLimit(campos,1,8)]),radius));
+	int dy;// = GetActorY(owner)+(FixedMul(-sin(directions[addLimit(campos,1,8)]),radius));
+	int dz;// = GetActorZ(owner)+height;
+	
+	int fRadius = 0;
+	int testtid = 666;//I'm so original
+	
+	for(fRadius = 0; fRadius<radius; fRadius+=1.0)
+		{
+		if(!Spawn("CameraPositionCheck", GetActorX(owner)+(FixedMul(-cos(angle),fRadius)),
+				  GetActorY(owner)+(FixedMul(-sin(angle),fRadius)),
+				  GetActorZ(owner)+(FixedMul(FixedDiv(fRadius, radius), height))+41.0, 666, 0))
+			{
+			fRadius-=1.0;
+			break;
+			}
+		}
+	Thing_Remove(testtid);
+	
+	dx = GetActorX(owner)+(FixedMul(-cos(angle),fRadius));
+	dy = GetActorY(owner)+(FixedMul(-sin(angle),fRadius));
+	dz = GetActorZ(owner)+(FixedMul(FixedDiv(fRadius, radius), height))+41.0;
+	
+	//Yeah don't uncomment this line if you like jittery camera.
+	//SetActorPosition(tid, dx, dy, dz, 0);
+	int x = GetActorX(tid);
+	int y = GetActorY(tid);
+	int z = GetActorZ(tid);
+	
+	if(turning)//Forces the camera to a certain point.
+		{//I use this sparingly, when the camera hits the ceiling is a good example.
+		SetActorPosition(tid, dx, dy, dz, false);
+		SetActorAngle(tid, angle);
+		resettimer--;
+		if(resettimer<-1)
+			resettimer = -1;
+		}
+	else
+		{
+		int vdx, vdy, vdz;
+		
+		//Make the camera follow you based on how far the camera is from where it should be.
+		
+		if(x!=dx)
+			{
+			vdx=dx-x;
+			}
+		if(y!=dy)
+			{
+			vdy=dy-y;
+			}
+		if(z!=dz)
+			{
+			vdz=(dz-z)/2;
+			}
+
+		//The part where I play with numbers.
+		//Essentially this converts the values from fixed point to integer to 
+		//intentionally make the camera's position a little less precise. This 
+		//avoids constant, albeit barely noticable jitter that it can sometimes have.
+		vdx=vdx>>16;
+		vdx=vdx<<16;
+		
+		vdy=vdy>>16;
+		vdy=vdy<<16;
+		
+		vdz=vdz>>16;
+		vdz=vdz<<16;
+		SetActorVelocity(tid, vdx, vdy, vdz, false, false);
+		}
+	Delay(1);
+	}
+}
+
+function int dynamic(int x)
+{
+if(x<0)return -1;
+if(x>0)return 1;
+return 0;
+}
+
+script PLAT_OPEN OPEN
+{
+SetAirControl(0.8);
+SetGameProperty(GPROP_SavesEnabled, false);
+SetGameProperty(GPROP_DeathRestarts, false);
+}

@@ -1,0 +1,109 @@
+actor NidoAlphaWep : SwordBase
+{
+weapon.ammotype "CapacityPowerA"
+
+States
+{
+Fire:
+TNT1 A 1 A_ScaleVelocity(0.5)
+TNT1 A 0 A_PlaySoundEx("weapon/slash1","Weapon")
+TNT1 A 0 A_SpawnItemEx("AtkSword", 60, 0, 40, 0, 0, 0)
+TNT1 A 0 A_SpawnItemEx("GfxSword", 60, 0, 40, 0, 0, 0)
+TNT1 A 9 A_ScaleVelocity(0.8)
+TNT1 A 0 A_Refire
+Goto Ready
+Hold:
+TNT1 A 1
+TNT1 A 0 A_Refire
+Goto Ready
+AltFire: // HP/CP checks after stopping Nido
+TNT1 A 0 A_JumpIfNoAmmo("AltHold")
+TNT1 A 0 A_GunFlash
+TNT1 A 0 A_JumpIfHealthLower(3, "WeakAlt")
+TNT1 A 0 A_PlaySoundEx("weapon/fireball","Weapon")  // four fireballs when healthy
+TNT1 A 1 A_SpawnItemEx("AtkFireball", 8, 0, 40, 20, 0, 7)
+TNT1 A 0 A_SpawnItemEx("AtkFireball", 8, 0, 40, 13, 0, 7)
+TNT1 A 0 A_SpawnItemEx("AtkFireball", 8, 0, 40, 17, 0, 7, 12)
+TNT1 A 0 A_SpawnItemEx("AtkFireball", 8, 0, 40, 17, 0, 7, -12)
+TNT1 A 8
+TNT1 A 3 // slightly slower attack speed when healthy
+TNT1 A 0 A_Refire
+Goto Ready
+WeakAlt:
+TNT1 A 0 A_PlaySoundEx("weapon/fireball","Weapon")
+TNT1 A 0 A_SpawnItemEx("AtkFireball", 8, 0, 40, 18, 0, 7)
+TNT1 A 8
+TNT1 A 1
+TNT1 A 0 A_Refire
+Goto Ready
+AltHold:
+TNT1 A 1
+TNT1 A 0 A_Refire
+Goto Ready
+Flash:
+TNT1 A 0 A_GiveInventory("DontMove", 1)
+TNT1 A 0 A_ChangeFlag(NOGRAVITY, true)
+TNT1 A 0 A_SetArg(0, momx)
+TNT1 A 0 A_SetArg(1, momy)
+TNT1 A 0 A_SetArg(2, momz)
+TNT1 AAAAAAAAAAAA 1 A_Stop
+TNT1 A 0 A_ChangeVelocity(args[0], args[1], args[2], CVF_REPLACE)
+TNT1 A 0 A_ChangeFlag(NOGRAVITY, false)
+TNT1 A 0 A_TakeInventory("DontMove", 1)
+stop
+}
+}
+
+actor CapacityPowerA : Ammo
+{
+inventory.amount 1
+inventory.maxamount 5
+}
+
+actor AtkFireball
+{
+PROJECTILE
+bouncesound "weapon/firebounce"
+Radius 8
+Height 16
+scale 4.0
+-NOGRAVITY
++CANBOUNCEWATER
++HEXENBOUNCE
++FORCEXYBILLBOARD
+speed 20
+bouncefactor 0.85
+wallbouncefactor 0.65
+reactiontime 14
+damage (1)
+States
+{
+Spawn:
+ATFI ABC 2
+BallBounce:
+ATFI DEF 2
+TNT1 A 0 A_Countdown
+Goto BallBounce
+Death:
+TNT1 A 0 A_SpawnItemEx("GfxFirePart", 0, 0, 0, random(-8, 8), random(-8, 8), random(1, 4), random(0, 360))
+TNT1 A 0 A_SpawnItemEx("GfxFirePart", 0, 0, 0, random(-8, 8), random(-8, 8), random(1, 4), random(0, 360))
+TNT1 A 0 A_SpawnItemEx("GfxFirePart", 0, 0, 0, random(-8, 8), random(-8, 8), random(1, 4), random(0, 360))
+TNT1 A 0 A_SpawnItemEx("GfxFirePart", 0, 0, 0, random(-8, 8), random(-8, 8), random(1, 4), random(0, 360))
+TNT1 A 1
+stop
+}
+}
+
+actor GfxFirePart : GfxSword
+{
+damage (0)
+States
+{
+Spawn:
+ATFI GHJGHJ 3
+Death:
+TNT1 A 0
+TNT1 A 1
+stop
+}
+}

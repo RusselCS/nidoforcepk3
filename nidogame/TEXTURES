@@ -1,0 +1,935 @@
+graphic M_DOOM, 1000,1000
+{
+   XScale 2.0
+   YScale 2.0
+   Patch NIDOBANN, 0, 32
+}
+
+/////////////
+//  OMEGA  //
+/////////////
+
+
+// green grass
+
+Texture OGRASG01, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH01, 0, 0
+}
+
+Texture OGRASG02, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH02, 0, 0
+}
+
+Texture OGRASG03, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH03, 0, 0
+}
+
+Texture OBORDG01, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH11, 0, 0
+}
+
+Texture OBORDG02, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH12, 0, 0
+}
+
+Texture OBORDG03, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH13, 0, 0
+}
+
+Texture OBORDG04, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH14, 0, 0
+}
+
+Texture OBORDG05, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH15, 0, 0
+}
+
+Texture OBORDG06, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH16, 0, 0
+}
+
+Texture OBORDG07, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH17, 0, 0
+}
+
+Texture OBORDG08, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH18, 0, 0
+}
+
+Texture OBORDG09, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH19, 0, 0
+}
+
+Texture OBORDG10, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH20, 0, 0
+}
+
+Texture OBORDG11, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH21, 0, 0
+}
+
+Texture OBORDG12, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH22, 0, 0
+}
+
+
+// pink grass (fun for weebs!)
+
+Texture OGRASP01, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH06, 0, 0
+}
+
+Texture OGRASP02, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH07, 0, 0
+}
+
+Texture OGRASP03, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH08, 0, 0
+}
+
+
+// shrine gate pieces (fantastic for weebs!)
+
+Texture OGATPILL, 16, 96
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH43, 0, 0
+	Patch OORCH44, 8, 0
+	Patch OORCH41, 0, 8
+	Patch OORCH42, 8, 8
+	Patch OORCH41, 0, 16
+	Patch OORCH42, 8, 16
+	Patch OORCH41, 0, 24
+	Patch OORCH42, 8, 24
+	Patch OORCH41, 0, 32
+	Patch OORCH42, 8, 32
+	Patch OORCH41, 0, 40
+	Patch OORCH42, 8, 40
+	Patch OORCH41, 0, 48
+	Patch OORCH42, 8, 48
+	Patch OORCH41, 0, 56
+	Patch OORCH42, 8, 56
+	Patch OORCH41, 0, 64
+	Patch OORCH42, 8, 64
+	Patch OORCH41, 0, 72
+	Patch OORCH42, 8, 72
+	Patch OORCH41, 0, 80
+	Patch OORCH42, 8, 80
+	Patch OORCH41, 0, 88
+	Patch OORCH42, 8, 88
+}
+
+Texture OGATPILS, 8, 32
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH50, 0, 0
+	Patch OORCH51, 0, 8
+	Patch OORCH50, 0, 16
+	Patch OORCH50, 0, 24
+}
+
+Texture OGATBEAM, 8, 16
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH45, 0, 0
+	Patch OORCH46, 0, 8
+}
+
+Texture OGATSIDL, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH47, 0, 0
+}
+
+Texture OGATSIDM, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH48, 0, 0
+}
+
+Texture OGATSIDR, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH49, 0, 0
+}
+
+Texture OGATBEA2, 8, 16
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH54, 0, 0
+	Patch OORCH52, 0, 8
+}
+
+Texture OGATBTOP, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH55, 0, 0
+}
+
+Texture OGATBBOT, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH53, 0, 0
+}
+
+
+// yellow ledge, dirt, etc
+
+Texture ODIRTY01, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH23, 0, 0
+}
+
+Texture ODIRTY02, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH24, 0, 0
+}
+
+Texture ODIRTY03, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH25, 0, 0
+}
+
+Texture OLEDGY01, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH26, 0, 0
+}
+
+Texture OLEDGY02, 8, 96
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH04, 0, 0
+	Patch OORCH26, 0, 8
+	Patch OORCH26, 0, 16
+	Patch OORCH26, 0, 24
+	Patch OORCH26, 0, 32
+	Patch OORCH26, 0, 40
+	Patch OORCH26, 0, 48
+	Patch OORCH26, 0, 56
+	Patch OORCH26, 0, 64
+	Patch OORCH26, 0, 72
+	Patch OORCH26, 0, 80
+	Patch OORCH26, 0, 88
+}
+
+Texture OLEDGY03, 8, 96
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH09, 0, 0
+	Patch OORCH26, 0, 8
+	Patch OORCH26, 0, 16
+	Patch OORCH26, 0, 24
+	Patch OORCH26, 0, 32
+	Patch OORCH26, 0, 40
+	Patch OORCH26, 0, 48
+	Patch OORCH26, 0, 56
+	Patch OORCH26, 0, 64
+	Patch OORCH26, 0, 72
+	Patch OORCH26, 0, 80
+	Patch OORCH26, 0, 88
+}
+
+
+// grey ledge, dirt, etc
+
+Texture ODIRTG02, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH28, 0, 0
+}
+
+Texture OLEDGG01, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH30, 0, 0
+}
+
+Texture OLEDGG02, 8, 96
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH05, 0, 0
+	Patch OORCH30, 0, 8
+	Patch OORCH30, 0, 16
+	Patch OORCH30, 0, 24
+	Patch OORCH30, 0, 32
+	Patch OORCH30, 0, 40
+	Patch OORCH30, 0, 48
+	Patch OORCH30, 0, 56
+	Patch OORCH30, 0, 64
+	Patch OORCH30, 0, 72
+	Patch OORCH30, 0, 80
+	Patch OORCH30, 0, 88
+}
+
+Texture OLEDGG03, 8, 96
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH10, 0, 0
+	Patch OORCH30, 0, 8
+	Patch OORCH30, 0, 16
+	Patch OORCH30, 0, 24
+	Patch OORCH30, 0, 32
+	Patch OORCH30, 0, 40
+	Patch OORCH30, 0, 48
+	Patch OORCH30, 0, 56
+	Patch OORCH30, 0, 64
+	Patch OORCH30, 0, 72
+	Patch OORCH30, 0, 80
+	Patch OORCH30, 0, 88
+}
+
+
+// water
+
+Texture OWATER01, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH31, 0, 0
+}
+
+Texture OWATER02, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH32, 0, 0
+}
+
+Texture OWATER03, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH33, 0, 0
+}
+
+Texture OWATER04, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH34, 0, 0
+}
+
+Texture OWATER05, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH35, 0, 0
+}
+
+Texture OWATER06, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH36, 0, 0
+}
+
+Texture OWATER07, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH37, 0, 0
+}
+
+Texture OWATER08, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH38, 0, 0
+}
+
+Texture OWATER09, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH39, 0, 0
+}
+
+Texture OWATER10, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch OORCH40, 0, 0
+}
+
+
+/////////////
+//  ALPHA  //
+/////////////
+
+
+// sand and dirt
+
+Texture ASANDY01, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI01, 0, 0
+}
+
+Texture ASANDY02, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI02, 0, 0
+}
+
+Texture ASANDY03, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI03, 0, 0
+}
+
+Texture ASANDY04, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI04, 0, 0
+}
+
+Texture ASANDY05, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI05, 0, 0
+}
+
+
+// dark brown dirt
+
+Texture ASANDY06, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI08, 0, 0
+}
+
+Texture ASANDY07, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI09, 0, 0
+}
+
+Texture ASANDY08, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI10, 0, 0
+}
+
+
+// light/dark brown ledges
+
+Texture ALEDGY01, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI06, 0, 0
+}
+
+Texture ALEDGY02, 8, 96
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI06, 0, 0
+	Patch AALTI06, 0, 8
+	Patch AALTI06, 0, 16
+	Patch AALTI06, 0, 24
+	Patch AALTI06, 0, 32
+	Patch AALTI07, 0, 40
+	Patch AALTI11, 0, 48
+	Patch AALTI11, 0, 56
+	Patch AALTI11, 0, 64
+	Patch AALTI11, 0, 72
+	Patch AALTI11, 0, 80
+	Patch AALTI11, 0, 88
+}
+
+Texture ALEDGY03, 8, 8  // dark and ledgy
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI11, 0, 0
+}
+
+
+// grey dirt
+
+Texture ASANDG01, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI12, 0, 0
+}
+
+Texture ASANDG02, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI13, 0, 0
+}
+
+Texture ASANDG03, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI14, 0, 0
+}
+
+Texture ASANDG04, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI16, 0, 0
+}
+
+
+// grey ledges and walls
+
+Texture ALEDGG01, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI15, 0, 0
+}
+
+Texture ALEDGG02, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI19, 0, 0
+}
+
+Texture ASWRLG01, 16, 16
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI17, 0, 0
+	Patch AALTI18, 0, 8
+	Patch AALTI18, 8, 0
+	Patch AALTI17, 8, 8
+}
+
+
+// fuckin hot sand
+
+Texture ASANDF01, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI20, 0, 0
+}
+
+Texture ASANDF02, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI21, 0, 0
+}
+
+Texture ASANDF03, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI22, 0, 0
+}
+
+Texture ASANDF04, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI23, 0, 0
+}
+
+Texture ASANDF05, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI25, 0, 0
+}
+
+
+// hot ledges and walls
+
+Texture ALEDGF01, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI24, 0, 0
+}
+
+Texture ALEDGF02, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI28, 0, 0
+}
+
+Texture ASWRLF01, 16, 16
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI26, 0, 0
+	Patch AALTI27, 0, 8
+	Patch AALTI27, 8, 0
+	Patch AALTI26, 8, 8
+}
+
+
+// bricks
+
+Texture ABRICK01, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI29, 0, 0
+}
+
+Texture ABRICK02, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI30, 0, 0
+}
+
+Texture ABRICK03, 16, 16
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch AALTI31, 0, 0
+	Patch AALTI32, 8, 0
+	Patch AALTI32, 0, 8
+	Patch AALTI31, 8, 8
+}
+
+
+/////////////
+//  ALPHA  //
+/////////////
+
+
+// blue dirt
+
+Texture BDIRTB01, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch BBLIZ01, 0, 0
+}
+
+Texture BDIRTB02, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch BBLIZ02, 0, 0
+}
+
+Texture BDIRTB03, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch BBLIZ03, 0, 0
+}
+
+Texture BDIRTB04, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch BBLIZ04, 0, 0
+}
+
+Texture BDIRTB05, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch BBLIZ06, 0, 0
+}
+
+
+// blue ledges, and a wall
+
+Texture BLEDGB01, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch BBLIZ05, 0, 0
+}
+
+Texture BLEDGB02, 8, 96
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch BBLIZ05, 0, 0
+	Patch BBLIZ05, 0, 8
+	Patch BBLIZ05, 0, 16
+	Patch BBLIZ05, 0, 24
+	Patch BBLIZ05, 0, 32
+	Patch BBLIZ08, 0, 40
+	Patch BBLIZ07, 0, 48
+	Patch BBLIZ07, 0, 56
+	Patch BBLIZ07, 0, 64
+	Patch BBLIZ07, 0, 72
+	Patch BBLIZ07, 0, 80
+	Patch BBLIZ07, 0, 88
+}
+
+Texture BLEDGB03, 8, 8  // darker and ledgier
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch BBLIZ07, 0, 0
+}
+
+Texture BLEDGY01, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch BBLIZ05, 0, 0
+}
+
+
+// blue bricks
+
+Texture BBRICK01, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch BBLIZ09, 0, 0
+}
+
+Texture BBRICK02, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch BBLIZ10, 0, 0
+}
+
+Texture BBRICK03, 16, 16
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch BBLIZ11, 0, 0
+	Patch BBLIZ12, 0, 8
+	Patch BBLIZ12, 8, 0
+	Patch BBLIZ11, 8, 8
+}
+
+
+// wow! pit!
+
+Texture DARKPIT, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch WOWPIT, 0, 0
+}
+
+Texture LIGHTPIT, 8, 8
+{
+	XScale 0.25
+	YScale 0.25
+	WorldPanning
+	Patch WOWPIT2, 0, 0
+}
+
+
+// sky textures
+
+Texture SKYBOX1, 128, 128
+{
+	XScale 0.5
+	YScale 0.5
+	WorldPanning
+	Patch SKY01, 0, 0
+}
+
+Texture SKYBOX2, 128, 128
+{
+	XScale 0.5
+	YScale 0.5
+	WorldPanning
+	Patch SKY02, 0, 0
+}
+
+Texture SKYBOX3, 128, 128
+{
+	XScale 0.5
+	YScale 0.5
+	WorldPanning
+	Patch SKY03, 0, 0
+}
+
+Texture SKYBOX4, 128, 128
+{
+	XScale 0.5
+	YScale 0.5
+	WorldPanning
+	Patch SKY04, 0, 0
+}

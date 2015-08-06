@@ -1,0 +1,19 @@
+const int NIDO_ENEMY = 902;
+const int NIDO_STATUS = 903;
+
+const int STATUS_MAXHEALTH = 1;
+const int STATUS_HEAL = 2;
+const int STATUS_HEALCHECK = 3;
+const int STATUS_DISABLEINPUT = 4;
+
+actor Counter : Inventory
+{
+inventory.amount 1
+inventory.maxamount 9999
+}
+
+actor Once : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}

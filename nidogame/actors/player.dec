@@ -1,0 +1,159 @@
+//This is an example of how the player should "behave." This is all placeholder,
+//But bear in mind how things should act.
+actor PlatformPlayer : PlayerPawn
+{
+player.displayname "PlatformPlayer"
+player.soundclass "PlatformPlayer"
+player.damagescreencolor "yellow"
+player.startitem "CustomWeapon"
+player.forwardmove 0, 0
+player.sidemove 0, 0
+player.jumpz 0
+player.colorrange 0 0
+player.startitem "NidoAlphaWep"
+player.startitem "NidoFloatJump", 1
+player.maxhealth 5
+MaxStepHeight 8
+health 5
+mass 9999
+//gravity 0.8
++NODAMAGETHRUST
++DONTBLAST
++NOBLOOD
++QUICKTORETALIATE
+//+PLAYER.NOFALLDEATH
+damagefactor "Dummy", 0.0
+scale 4.0
+var int user_jumping;
+var int user_attacking;
+var int user_moving;
+var int user_magic;
+var int user_float;
+States
+{
+//See like...
+//ACS will set the user variables while you change shit with the states.
+//That's it.
+Spawn:
+NIDO A 0 A_JumpIf(user_moving>0, "See")
+NIDO A 1 A_JumpIf(user_jumping>0, "Jumping")
+loop
+See:
+NIDO B 0 A_JumpIf(user_moving==0, "Spawn")
+NIDO BBBBBCCCCCDDDDDEEEEEFFFFFGGGGG 1 A_JumpIf(user_jumping>0, "Jumping")
+loop
+Missile:
+NIDO J 2
+NIDO J 0 A_JumpIf(user_magic>0, "Magic")
+NIDO J 0 A_JumpIf(user_jumping>0, "JumpMissile")
+NIDO J 0 A_JumpIf(user_moving>0, "SeeMissile")
+NIDO JK 4
+NIDO J 0 A_JumpIf(user_jumping>0, "Jumping")
+NIDO J 0 A_JumpIf(user_moving>0, "See")
+Goto Spawn
+SeeMissile:
+NIDO JK 4
+NIDO J 0 A_JumpIf(user_jumping>0, "Jumping")
+NIDO J 0 A_JumpIf(user_moving>0, "See")
+Goto Spawn
+JumpMissile:
+NIDO JK 4
+NIDO J 0 A_JumpIf(user_jumping>0, "Jumping")
+NIDO J 0 A_JumpIf(user_moving>0, "See")
+Goto Spawn
+Magic:
+NIDO L 0 A_JumpIf(user_jumping>0, "JumpMagic")
+NIDO L 0 A_JumpIf(user_moving>0, "SeeMagic")
+NIDO LMLM 4
+NIDO L 0 A_JumpIf(user_jumping>0, "Jumping")
+NIDO L 0 A_JumpIf(user_moving>0, "See")
+Goto Spawn
+JumpMagic:
+NIDO LMLM 4
+NIDO L 0 A_JumpIf(user_jumping>0, "Jumping")
+NIDO L 0 A_JumpIf(user_moving>0, "See")
+Goto Spawn
+SeeMagic: //DO YOU BELIEVE IN MAGIC
+NIDO LMLM 4
+NIDO L 0 A_JumpIf(user_jumping>0, "Jumping")
+NIDO L 0 A_JumpIf(user_moving>0, "See")
+Goto Spawn
+Jumping:// [Lego] If you look at this, you can probably tell why I was cringing
+NIDO H 0 A_JumpIf(user_float>0, "Float")
+NIDO H 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO H 0 A_JumpIf(user_float>0, "Float")
+NIDO H 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO H 0 A_JumpIf(user_float>0, "Float")
+NIDO H 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO H 0 A_JumpIf(user_float>0, "Float")
+NIDO H 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO H 0 A_JumpIf(user_float>0, "Float")
+NIDO H 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO H 0 A_JumpIf(user_float>0, "Float")
+NIDO I 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO H 0 A_JumpIf(user_float>0, "Float")
+NIDO I 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO H 0 A_JumpIf(user_float>0, "Float")
+NIDO I 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO H 0 A_JumpIf(user_float>0, "Float")
+NIDO I 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO H 0 A_JumpIf(user_float>0, "Float")
+NIDO I 1 A_JumpIf(user_jumping==0, "Spawn")
+loop
+Float:// [Smash] sorry Lego
+NIDO N 0 A_JumpIf(user_float==0, "Jumping")
+NIDO N 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO N 0 A_JumpIf(user_float==0, "Jumping")
+NIDO N 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO N 0 A_JumpIf(user_float==0, "Jumping")
+NIDO N 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO O 0 A_JumpIf(user_float==0, "Jumping")
+NIDO O 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO O 0 A_JumpIf(user_float==0, "Jumping")
+NIDO O 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO O 0 A_JumpIf(user_float==0, "Jumping")
+NIDO O 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO P 0 A_JumpIf(user_float==0, "Jumping")
+NIDO P 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO P 0 A_JumpIf(user_float==0, "Jumping")
+NIDO P 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO P 0 A_JumpIf(user_float==0, "Jumping")
+NIDO P 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO Q 0 A_JumpIf(user_float==0, "Jumping")
+NIDO Q 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO Q 0 A_JumpIf(user_float==0, "Jumping")
+NIDO Q 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO Q 0 A_JumpIf(user_float==0, "Jumping")
+NIDO Q 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO R 0 A_JumpIf(user_float==0, "Jumping")
+NIDO R 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO R 0 A_JumpIf(user_float==0, "Jumping")
+NIDO R 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO R 0 A_JumpIf(user_float==0, "Jumping")
+NIDO R 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO S 0 A_JumpIf(user_float==0, "Jumping")
+NIDO S 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO S 0 A_JumpIf(user_float==0, "Jumping")
+NIDO S 1 A_JumpIf(user_jumping==0, "Spawn")
+NIDO S 0 A_JumpIf(user_float==0, "Jumping")
+NIDO S 1 A_JumpIf(user_jumping==0, "Spawn")
+loop
+Pain:
+NIDO A 0 A_Pain
+NIDO A 1
+NIDO A 1
+NIDO A 0 A_JumpIf(user_jumping>0, "Jumping")
+NIDO A 0 A_JumpIf(user_moving>0, "See")
+Goto Spawn
+Death:
+NIDO A 0 A_Stop
+NIDO A 0 SetPlayerProperty(0, 0, 4)
+NIDO A 0 A_NoBlocking
+NIDO A 0 A_PlayerScream
+NIDO A 0 A_SpawnItemEx("EnemyPoof", 0, 0, 32)
+NIDO Z 1 A_CheckPlayerDone
+wait
+}
+}
+
+actor NidoFloatJump : Once {}

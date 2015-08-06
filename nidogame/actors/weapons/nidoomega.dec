@@ -4,10 +4,12 @@ actor NidoOmegaWep : SwordBase
 States
 {
 Deselect:
+TNT1 A 0 ACS_ExecuteAlways(NIDO_STATUS, 0, STATUS_MAXHEALTH, 5)
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
 TNT1 A 1 A_Lower
 Loop
 Select:
+TNT1 A 0 ACS_ExecuteAlways(NIDO_STATUS, 0, STATUS_MAXHEALTH, 6)
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
 TNT1 A 1 A_Raise
 Loop

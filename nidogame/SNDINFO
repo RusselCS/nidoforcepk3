@@ -1,7 +1,3 @@
-pickup/health		HPGET
-pickup/capacity		CPGET
-pickup/weapon		WEPGET
-
 menu/activate		MOPEN
 menu/backup			MOPEN
 menu/prompt			MOPEN

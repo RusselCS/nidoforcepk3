@@ -109,7 +109,6 @@ while(GetActorProperty(0, APROP_HEALTH)>0)
 		if(health>GetActorProperty(0, APROP_HEALTH))
 			{
 			frametimer = time;
-			if(invuln)SetActorProperty(0, APROP_INVULNERABLE, true);
 			}
 		health = GetActorProperty(0, APROP_HEALTH);
 		}
@@ -129,10 +128,7 @@ while(GetActorProperty(0, APROP_HEALTH)>0)
 		frametimer--;
 		}
 	else
-		{
 		SetActorProperty(0, APROP_RENDERSTYLE, STYLE_NORMAL);
-		if(invuln)SetActorProperty(0, APROP_INVULNERABLE, false);
-		}
 	
 	if(contact==1)
 		SpawnSpotForced("EnemyRadius", 0, 0, 0);

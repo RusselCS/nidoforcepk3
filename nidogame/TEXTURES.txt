@@ -1,10 +1,3 @@
-graphic M_DOOM, 1000,1000
-{
-   XScale 2.0
-   YScale 2.0
-   Patch NIDOBANN, 0, 32
-}
-
 /////////////
 //  OMEGA  //
 /////////////

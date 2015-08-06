@@ -33,7 +33,6 @@ int hasJumped = 0;
 int releasedJump = 0;
 int airtime = 0;
 int floattime = 0;
-int landed = 0;
 
 campos = GetLevelInfo(LEVELINFO_PAR_TIME);
 
@@ -66,17 +65,14 @@ while(!ended)
 			{
 			if(Buttons & BT_FORWARD)
 				{
-				if(CheckInventory("DontMove")==0)
-					angle = directions[addLimit(campos, 2, 8)];
+				angle = directions[addLimit(campos, 2, 8)];
 				}
 			else if(Buttons & BT_BACK)
 				{
-				if(CheckInventory("DontMove")==0)
-					angle = directions[addLimit(campos, 4, 8)];
+				angle = directions[addLimit(campos, 4, 8)];
 				}
 			else
-				if(CheckInventory("DontMove")==0)
-					angle = directions[addLimit(campos, 3, 8)];
+				angle = directions[addLimit(campos, 3, 8)];
 				
 			moving = true;
 			}
@@ -84,38 +80,32 @@ while(!ended)
 			{
 			if(Buttons & BT_FORWARD)
 				{
-				if(CheckInventory("DontMove")==0)
-					angle = directions[addLimit(campos, 0, 8)];
+				angle = directions[addLimit(campos, 0, 8)];
 				}
 			else if(Buttons & BT_BACK || stick_y < -3200)
 				{
-				if(CheckInventory("DontMove")==0)
-					angle = directions[addLimit(campos, 6, 8)];
+				angle = directions[addLimit(campos, 6, 8)];
 				}
 			else
-				if(CheckInventory("DontMove")==0)
-					angle = directions[addLimit(campos, 7, 8)];
+				angle = directions[addLimit(campos, 7, 8)];
 
 			moving = true;
 			}
 		else if(Buttons & BT_FORWARD)
 			{
-			if(CheckInventory("DontMove")==0)
-				angle = directions[addLimit(campos, 1, 8)];
+			angle = directions[addLimit(campos, 1, 8)];
 			moving = true;
 			}
 		else if(Buttons & BT_BACK)
 			{
-			if(CheckInventory("DontMove")==0)
-				angle = directions[addLimit(campos, 5, 8)];
+			angle = directions[addLimit(campos, 5, 8)];
 			moving = true;
 			}
 		
 		//Stick inputs are fun
 		if(abs(stick_y) > 3200 || abs(stick_x) > 3200)
 			{
-			if(CheckInventory("DontMove")==0)
-				angle = VectorAngle(stick_x, stick_y)+directions[addLimit(campos, 7, 8)];
+			angle = VectorAngle(stick_x, stick_y)+directions[addLimit(campos, 7, 8)];
 			moving = true;
 			}
 			
@@ -193,12 +183,15 @@ while(!ended)
 		
 		SetActorAngle(0, angle);
 		SetActorPitch(0, 0);
-		if(moving && CheckInventory("DontMove")==0)
+		if(moving)
 			{
-			if(GetActorProperty(0, APROP_HEALTH)>1)
-				GiveInventory("MoveForward", 1);
-			else
-				GiveInventory("MoveSlow", 1);
+			if(CheckInventory("DontMove")==0)
+				{
+				if(GetActorProperty(0, APROP_HEALTH)>1)
+					GiveInventory("MoveForward", 1);
+				else
+					GiveInventory("MoveSlow", 1);
+				}
 
 			SetUserVariable(tid, "user_moving", 1);
 			walking = true;
@@ -216,12 +209,8 @@ while(!ended)
 		{
 		if (ThingCount(0, ctid)) { Thing_Remove(ctid); }
 		}
-	if(GetActorVelZ(0)==0)
-		landed++;
-	else
-		landed = 0;
-	
-	if(GetActorZ(0)-GetActorFloorZ(0)>0 && landed<3)
+		
+	if(GetActorZ(0)-GetActorFloorZ(0)>0)
 		{
 		SetUserVariable(tid, "user_jumping", 1);
 		airtime++;

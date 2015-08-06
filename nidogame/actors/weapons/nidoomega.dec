@@ -1,6 +1,6 @@
 actor NidoOmegaWep : SwordBase
 {
-
+inventory.icon "WICOO"
 States
 {
 Deselect:

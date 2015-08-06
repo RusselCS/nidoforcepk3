@@ -1,6 +1,6 @@
 actor NidoBetaWep : SwordBase
 {
-
+inventory.icon "WICOB"
 States
 {
 Fire:

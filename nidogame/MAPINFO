@@ -2,10 +2,15 @@
 // Apparently you need to have wad names be the same as the map code to get the
 // map working in the maps folder
 // fucking THANKS
+
+// GOOD THING WE HAVE A WADS FOLDER NOW
+// Said wads folder also makes it so you can't run this game in any version of
+// GLOOME aside from the one this game is shipped with.
+// woo
 clearepisodes
-episode IGMCB1
+episode IGMCHUB
 {
-name = "Test Map"
+name = "Nido Force"
 }
 
 clearskills

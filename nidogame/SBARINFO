@@ -4,6 +4,7 @@ resolution 200, 125;
 statusbar fullscreen, forcescaled
 	{
 	DrawImage "NIDOICO", 3, 3;
+	DrawImage weaponicon, 7, 24;
 	
 	IsSelected not NidoOmegaWep
 		{

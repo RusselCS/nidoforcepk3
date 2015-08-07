@@ -179,7 +179,7 @@ stop
 actor IggyFireball
 {
 PROJECTILE
-bouncesound "weapon/firebounce"
+seesound "weapon/firebounce"
 Translation "228:228=138:138", "218:218=105:105", "220:220=110:110"
 Radius 8
 Height 16

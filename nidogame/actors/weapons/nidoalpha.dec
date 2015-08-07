@@ -50,7 +50,7 @@ inventory.maxamount 5
 actor AtkFireball
 {
 PROJECTILE
-bouncesound "weapon/firebounce"
+seesound "weapon/firebounce"
 Radius 8
 Height 16
 scale 4.0

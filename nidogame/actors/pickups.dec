@@ -81,6 +81,7 @@ actor FakeForceFrag : CustomInventory
 +RANDOMIZE
 +FORCEYBILLBOARD
 Renderstyle fuzzy
+inventory.pickupsound "pickup/frag"
 Scale 4.0
 States
 {

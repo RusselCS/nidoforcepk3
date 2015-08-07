@@ -28,8 +28,9 @@ STNI A 0 A_ChangeVelocity(random(4, 3), 0, random(-3, 3)*random(0, 1), CVF_RELAT
 STNI A 0 A_LookEx(0, 0, 512, 512, 360, "See")
 loop
 See:
-STNI A 0 A_Stop
 STNI A 0 A_JumpIf(z-floorz>128, "Lower")
+STNI A 1
+STNI A 0 A_Stop
 STNI A 0 A_FaceTarget
 STNI AB 4 A_Chase
 STNI A 0 A_ChangeVelocity(0, 6+(-12*random(0,1)), 0, CVF_RELATIVE)

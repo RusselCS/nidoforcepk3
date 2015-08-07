@@ -30,7 +30,7 @@ TNT1 A 1 A_CheckFloor("FireAttack")
 Goto Ready
 FireAttack:
 TNT1 A 1 A_ScaleVelocity(0.5)
-TNT1 A 0 A_PlaySoundEx("weapon/slash1","Weapon")
+TNT1 A 0 A_PlaySoundEx("weapon/sword","Weapon")
 TNT1 A 0 A_SpawnItemEx("AtkSword", 55, 0, 32, 0, 0, 0)
 TNT1 A 0 A_SpawnItemEx("GfxSword", 55, 0, 32, 0, 0, 0)
 TNT1 A 9 A_ScaleVelocity(0.8)

@@ -3,46 +3,187 @@ actor NidoBetaWep : SwordBase
 inventory.icon "WICOB"
 States
 {
-Fire:
-TNT1 A 1 A_ScaleVelocity(0.5)
-TNT1 A 0 A_PlaySoundEx("weapon/slash1","Weapon")
-TNT1 A 0 A_SpawnItemEx("AtkSword", 60, 0, 40, 0, 0, 0)
-TNT1 A 0 A_SpawnItemEx("GfxSword", 60, 0, 40, 0, 0, 0)
-TNT1 A 9 A_ScaleVelocity(0.8)
-TNT1 A 0 A_Refire
-Goto Ready
-Hold:
-TNT1 A 1
-TNT1 A 0 A_Refire
-Goto Ready
+// Fire and FireAttack inherit from SwordBase
 AltFire:
-//TNT1 A 1 A_Stop
-TNT1 A 1 A_GiveInventory("DontMove", 1)
-TNT1 A 0 A_ChangeFlag("NOGRAVITY", 1)
-//TNT1 A 0 SetPlayerProperty(0,1,4) // HP/CP checks after stopping Nido
-TNT1 A 0 A_JumpIfNoAmmo("AltHold")
+TNT1 A 0 A_JumpIfInventory("CapacityPower",1,"AltCont")
+goto NoAmmo
+AltCont:
+TNT1 A 0 A_GunFlash // controls alt stopping
+TNT1 A 0 A_TakeInventory("CapacityPower", 1)
 TNT1 A 0 A_JumpIfHealthLower(3, "WeakAlt")
-TNT1 A 0 A_PlaySoundEx("weapon/fireball","Weapon")  // four fireballs when healthy
-TNT1 A 8
-TNT1 A 0 A_TakeInventory("DontMove", 1)
-TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
-//TNT1 A 0 SetPlayerProperty(0,0,4)
-TNT1 A 3 // slightly slower attack speed when healthy
+TNT1 A 0 A_PlaySoundEx("weapon/iceshot","Weapon") // melee snow field when healthy
+TNT1 A 0 A_SpawnItemEx("AtkIceShot", 8, 0, 32, 14, 0, 0)
+TNT1 A 0 A_SpawnItemEx("GfxSnowField", 0, 0, 16, 0, 0, 0)
+TNT1 A 4
+TNT1 A 0 A_SpawnItemEx("AtkSnowField", 0, 0, 16, 0, 0, 0)
+TNT1 A 12 // slightly slower attack speed when healthy
 TNT1 A 0 A_Refire
 Goto Ready
 WeakAlt:
-TNT1 A 0 A_PlaySoundEx("weapon/fireball","Weapon")
-TNT1 A 0 A_SpawnItemEx("AtkFireball", 8, 0, 40, 18, 0, 7)
-TNT1 A 8
-TNT1 A 0 A_TakeInventory("DontMove", 1)
-TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
-//TNT1 A 0 SetPlayerProperty(0,0,4)
-TNT1 A 1
+TNT1 A 0 A_PlaySoundEx("weapon/iceshot","Weapon")
+TNT1 A 0 A_SpawnItemEx("AtkIceShot", 8, 0, 32, 14, 0, 0)
+TNT1 A 10
 TNT1 A 0 A_Refire
 Goto Ready
 AltHold:
 TNT1 A 1
 TNT1 A 0 A_Refire
 Goto Ready
+NoAmmo:
+TNT1 A 1
+Goto Ready
+}
+}
+
+actor AtkSnowField
+{
+PROJECTILE
+radius 128
+height 8
+scale 4.0
++LOOKALLAROUND
++SKYEXPLODE
++DONTBLAST
++RIPPER
+speed 0
+damage (1)
+States
+{
+Spawn:
+TNT1 A 1
+Death:
+TNT1 A 0
+TNT1 A 1
+stop
+}
+}
+
+actor AtkIceShot
+{
+PROJECTILE
+Radius 10
+Height 12
+scale 4.0
++FORCEXYBILLBOARD
+speed 30
+damage (1)
+States
+{
+Spawn:
+ATBL A 3
+loop
+Death:
+TNT1 A 0 A_SpawnItemEx("AtkIceShot2", -12, 0, 0, 24, 0, 0)
+TNT1 A 0 A_SpawnItemEx("GfxIcePart1", 0, 0, 0, random(-3, 3), random(-3, 3), random(-3, 3), random(0, 360))
+TNT1 A 0 A_SpawnItemEx("GfxIcePart2", 0, 0, 0, random(-3, 3), random(-3, 3), random(-3, 3), random(0, 360))
+TNT1 A 0 A_SpawnItemEx("GfxIcePart1", 0, 0, 0, random(-3, 3), random(-3, 3), random(-3, 3), random(0, 360))
+TNT1 A 0 A_SpawnItemEx("GfxIcePart2", 0, 0, 0, random(-3, 3), random(-3, 3), random(-3, 3), random(0, 360))
+TNT1 A 1
+stop
+}
+}
+
+actor AtkIceShot2 : AtkIceShot
+{
+States
+{
+Spawn:
+ATBL C 3
+loop
+Death:
+TNT1 A 0 A_SpawnItemEx("GfxIcePuff", 0, 0, 0, random(-3, 3), random(-3, 3), random(-3, 3), random(0, 360))
+TNT1 A 0 A_SpawnItemEx("GfxIcePuff", 0, 0, 0, random(-3, 3), random(-3, 3), random(-3, 3), random(0, 360))
+TNT1 A 0 A_SpawnItemEx("GfxIcePuff", 0, 0, 0, random(-3, 3), random(-3, 3), random(-3, 3), random(0, 360))
+TNT1 A 0 A_SpawnItemEx("GfxIcePuff", 0, 0, 0, random(-3, 3), random(-3, 3), random(-3, 3), random(0, 360))
+TNT1 A 1
+stop
+}
+}
+
+actor GfxIcePuff : GfxSword
+{
+damage (0)
+States
+{
+Spawn:
+ATBL DEFGH 4
+Death:
+TNT1 A 0
+TNT1 A 1
+stop
+}
+}
+
+actor GfxSnowField : GfxSword
+{
+damage (0)
+States
+{
+Spawn:
+TNT1 A 1
+TNT1 A 0 A_SpawnItemEx("GfxIcePart1", 0, 0, 0, 4, 4, 0, random(0, 360))
+TNT1 A 0 A_SpawnItemEx("GfxIcePart2", 0, 0, 0, 4, 4, 0, random(0, 360))
+TNT1 A 0 A_SpawnItemEx("GfxIcePart1", 0, 0, 0, 4, 4, 0, random(0, 360))
+TNT1 A 0 A_SpawnItemEx("GfxIcePart2", 0, 0, 0, 4, 4, 0, random(0, 360))
+//
+TNT1 A 0 A_SpawnItemEx("GfxIcePart1", 0, 0, 0, 5, 5, 0, random(0, 360))
+TNT1 A 0 A_SpawnItemEx("GfxIcePart2", 0, 0, 0, 5, 5, 0, random(0, 360))
+TNT1 A 0 A_SpawnItemEx("GfxIcePart1", 0, 0, 0, 5, 5, 0, random(0, 360))
+TNT1 A 0 A_SpawnItemEx("GfxIcePart2", 0, 0, 0, 5, 5, 0, random(0, 360))
+TNT1 A 0 A_SpawnItemEx("GfxIcePart1", 0, 0, 0, 5, 5, 0, random(0, 360))
+TNT1 A 0 A_SpawnItemEx("GfxIcePart2", 0, 0, 0, 5, 5, 0, random(0, 360))
+//
+TNT1 A 0 A_SpawnItemEx("GfxIcePart1", 0, 0, 0, 6, 6, 0, random(0, 360))
+TNT1 A 0 A_SpawnItemEx("GfxIcePart2", 0, 0, 0, 6, 6, 0, random(0, 360))
+TNT1 A 0 A_SpawnItemEx("GfxIcePart1", 0, 0, 0, 6, 6, 0, random(0, 360))
+TNT1 A 0 A_SpawnItemEx("GfxIcePart2", 0, 0, 0, 6, 6, 0, random(0, 360))
+TNT1 A 0 A_SpawnItemEx("GfxIcePart1", 0, 0, 0, 6, 6, 0, random(0, 360))
+TNT1 A 0 A_SpawnItemEx("GfxIcePart2", 0, 0, 0, 6, 6, 0, random(0, 360))
+Death:
+TNT1 A 0
+TNT1 A 1
+stop
+}
+}
+
+actor GfxIcePart1 : GfxSword
+{
+damage (0)
+States
+{
+Spawn:
+ATBL IJKL 3
+Death:
+TNT1 A 0
+TNT1 A 1
+stop
+}
+}
+
+actor GfxIcePart2 : GfxSword
+{
+damage (0)
+States
+{
+Spawn:
+ATBL LKJI 4
+Death:
+TNT1 A 0
+TNT1 A 1
+stop
+}
+}
+
+actor GfxIcePart3 : GfxSword
+{
+damage (0)
+States
+{
+Spawn:
+ATBL MNMN 4
+Death:
+TNT1 A 0
+TNT1 A 1
+stop
 }
 }

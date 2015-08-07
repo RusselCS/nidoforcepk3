@@ -4,17 +4,22 @@ resolution 200, 125;
 statusbar fullscreen, forcescaled
 	{
 	DrawImage "NIDOICO", 3, 3;
-	DrawImage weaponicon, 7, 24;
+	//DrawImage weaponicon, 7, 24;
 	
-	IsSelected not NidoOmegaWep
+	IsSelected NidoAlphaWep
 		{
-		DrawBar "HP5FULL", "HP5EMPT", Health, horizontal, 14, 4;
-		DrawBar "MP4FULL", "MP4EMPT", Cell, horizontal, 13, 12;
+		DrawBar "HP5FULL", "HP5EMPT", Health, horizontal, 12, 4;
+		DrawBar "CPAFULL", "CPAEMPT", CapacityPowerA, horizontal, 12, 12;
+		}
+	IsSelected NidoBetaWep
+		{
+		DrawBar "HP5FULL", "HP5EMPT", Health, horizontal, 12, 4;
+		DrawBar "CPBFULL", "CPBEMPT", CapacityPower, horizontal, 12, 12;
 		}
 	IsSelected NidoOmegaWep
 		{
 		DrawBar "HP6FULL", "HP6EMPT", Health, horizontal, 12, 4;
-		DrawBar "MP4FULL", "MP4EMPT", Cell, horizontal, 11, 12;
+		DrawBar "CPOFULL", "CPOEMPT", CapacityPower, horizontal, 12, 12;
 		}
 	
 	InInventory not InHubMap

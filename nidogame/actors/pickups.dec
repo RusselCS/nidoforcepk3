@@ -235,7 +235,16 @@ Spawn:
 CPUP ABCD 4
 loop
 Pickup:
-CPUP A 0
+TNT1 A 0 A_JumpIfInventory("NidoAlphaWep", 1, "PickAlpha")
+CPUP A 0 A_JumpIfInventory("CapacityPower", 3, "End")
+TNT1 A 0 A_GiveInventory("CapacityPower", 1)
+stop
+PickAlpha:
+CPUP A 0 A_JumpIfInventory("CapacityPowerA", 5, "End")
+TNT1 A 0 A_GiveInventory("CapacityPowerA", 1)
+stop
+End:
+TNT1 A 0
 fail
 }
 }
@@ -245,19 +254,19 @@ fail
 actor AlphaPickup : CustomInventory 11010
 {
 //$Category NidoForce-Weapons
-Inventory.pickupmessage "Alpha ~ Flameshot"
+Inventory.pickupmessage "Alpha [Fireball]"
 Inventory.pickupsound "pickup/weapon"
 Scale 4.0
 States
 {
 Spawn:
-ABUP A 1
+ABUP AB 4
 loop
 Pickup:
 TNT1 A 0 A_JumpIfInventory("NidoAlphaWep", 1, "End")
 TNT1 A 0 A_GiveInventory("NidoAlphaWep", 1)
 TNT1 A 0 A_SelectWeapon("NidoAlphaWep")
-TNT1 A 0 ACS_ExecuteAlways(NIDO_WEAPON, 0, 0)
+TNT1 A 0 A_GiveInventory("CapacityPowerA", 5) // Fill Alpha CP
 TNT1 A 0 ACS_ExecuteAlways(NIDO_STATUS, 0, STATUS_MAXHEALTH, 5)// Remove Omega Buff
 TNT1 A 0 A_TakeInventory("NidoFloatJump", 1)// Remove Beta Floating
 TNT1 A 0 A_TakeInventory("NidoOmegaWep", 1)
@@ -272,19 +281,19 @@ fail
 actor BetaPickup : CustomInventory 11011
 {
 //$Category NidoForce-Weapons
-Inventory.pickupmessage "Beta ~ Cyrospear"
+Inventory.pickupmessage "Beta [IceShot]"
 Inventory.pickupsound "pickup/weapon"
 Scale 4.0
 States
 {
 Spawn:
-ABUP C 1
+ABUP CD 4
 loop
 Pickup:
 TNT1 A 0 A_JumpIfInventory("NidoBetaWep", 1, "End")
 TNT1 A 0 A_GiveInventory("NidoBetaWep", 1)
 TNT1 A 0 A_SelectWeapon("NidoBetaWep")
-TNT1 A 0 ACS_ExecuteAlways(NIDO_WEAPON, 0, 1)
+TNT1 A 0 A_GiveInventory("CapacityPower", 3) // Fill CP
 TNT1 A 0 ACS_ExecuteAlways(NIDO_STATUS, 0, STATUS_MAXHEALTH, 5)// Remove Omega Buff
 TNT1 A 0 A_GiveInventory("NidoFloatJump", 1)// Add Beta Floating
 TNT1 A 0 A_TakeInventory("NidoOmegaWep", 1)
@@ -299,19 +308,19 @@ fail
 actor OmegaPickup : CustomInventory 11012
 {
 //$Category NidoForce-Weapons
-Inventory.pickupmessage "Omega ~ Flash"
+Inventory.pickupmessage "Omega [Shield]"
 Inventory.pickupsound "pickup/weapon"
 Scale 4.0
 States
 {
 Spawn:
-ABUP E 1
+ABUP EF 4
 loop
 Pickup:
 TNT1 A 0 A_JumpIfInventory("NidoOmegaWep", 1, "End")
 TNT1 A 0 A_GiveInventory("NidoOmegaWep", 1)
 TNT1 A 0 A_SelectWeapon("NidoOmegaWep")
-TNT1 A 0 ACS_ExecuteAlways(NIDO_WEAPON, 0, 2)
+TNT1 A 0 A_GiveInventory("CapacityPower", 3) // Fill CP
 TNT1 A 0 ACS_ExecuteAlways(NIDO_STATUS, 0, STATUS_MAXHEALTH, 6)// Add Omega Buff
 TNT1 A 0 A_TakeInventory("NidoFloatJump", 1)// Remove Beta Floating
 TNT1 A 0 A_TakeInventory("NidoBetaWep", 1)

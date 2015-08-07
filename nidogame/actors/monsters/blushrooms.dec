@@ -36,6 +36,8 @@ SMUS AAAA 3 A_Chase
 loop
 Missile:
 SMUS G 0 A_JumpIfCloser(256, "Hop")
+SMUS G 0 A_FaceTarget
+SMUS D 1
 SMUS G 0 A_CustomMissile("BlushroomSpore", 32, 0, angle+20, CMF_ABSOLUTEANGLE|CMF_ABSOLUTEPITCH, 0)
 SMUS G 0 A_CustomMissile("BlushroomSpore", 32, 0, angle-20, CMF_ABSOLUTEANGLE|CMF_ABSOLUTEPITCH, 0)
 SMUS G 0 A_CustomMissile("BlushroomSpore", 32, 0, angle, CMF_ABSOLUTEANGLE|CMF_ABSOLUTEPITCH, 0)

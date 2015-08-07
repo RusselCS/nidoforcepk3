@@ -1,5 +1,6 @@
 const int NIDO_ENEMY = 902;
 const int NIDO_STATUS = 903;
+const int NIDO_WEAPON = 906;
 
 const int STATUS_MAXHEALTH = 1;
 const int STATUS_HEAL = 2;

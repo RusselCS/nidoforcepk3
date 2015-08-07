@@ -10,6 +10,7 @@
 #DEFINE NIDO_STATUS 903
 #DEFINE NIDO_DEATH 904
 #DEFINE NIDO_OPEN 905
+#DEFINE NIDO_WEAPON 906
 
 #DEFINE STATUS_MAXHEALTH 1
 #DEFINE STATUS_HEAL 2
@@ -26,6 +27,10 @@ world int 6: World6Frags;
 global int 1: TotalFrags;
 global int 2: Iggy1Frag;
 global int 3: Iggy2Frag;
+global int 4: Iggy3Frag;
+
+global int 49: weaponMode;
+global int 50: currentLevel;
 
 script NIDO_ENTER ENTER
 {
@@ -191,6 +196,7 @@ ChangeLevel("IGMCB1", 0, CHANGELEVEL_NOINTERMISSION, -1);
 script NIDO_OPEN OPEN//This script saves the number of force frags you have between worlds.
 {
 Delay(5);
+SetActivator(1000);
 if(CheckActorInventory(1000, "ForceFrag1")>=World1Frags)
 	World1Frags = CheckActorInventory(1000, "ForceFrag1");
 else
@@ -225,6 +231,48 @@ if(CheckActorInventory(1000, "ForceFragStock")>TotalFrags)
 	TotalFrags = CheckActorInventory(1000, "ForceFragStock");
 else
 	setActorInventory(1000, "ForceFragStock", TotalFrags);
+
+if(CheckActorInventory(1000, "IggyFrag1")>Iggy1Frag)
+	Iggy1Frag=CheckActorInventory(1000, "IggyFrag1");
+else
+	setActorInventory(1000, "IggyFrag1", Iggy1Frag);
+	
+if(CheckActorInventory(1000, "IggyFrag2")>Iggy2Frag)
+	Iggy2Frag=CheckActorInventory(1000, "IggyFrag2");
+else
+	setActorInventory(1000, "IggyFrag2", Iggy2Frag);
+	
+if(CheckActorInventory(1000, "IggyFrag3")>Iggy3Frag)
+	Iggy3Frag=CheckActorInventory(1000, "IggyFrag3");
+else
+	setActorInventory(1000, "IggyFrag3", Iggy2Frag);
+	
+if(CheckActorInventory(1000, "CurrentLevel")>CurrentLevel)
+	CurrentLevel=CheckActorInventory(1000, "CurrentLevel");
+else
+	setActorInventory(1000, "CurrentLevel", CurrentLevel);
+
+switch(weaponmode)
+	{
+	Case 0:
+	PrintBold(s:"Alpha", i:weaponmode);
+	Break;
+	Case 1:
+	PrintBold(s:"Beta", i:weaponmode);
+	GiveInventory("BetaPickup",1);
+	SetWeapon("NidoBetaWep");
+	Break;
+	Case 2:
+	PrintBold(s:"Omega", i:weaponmode);
+	GiveInventory("OmegaPickup",1);
+	SetWeapon("OmegaBetaWep");
+	Break;
+	}
+}
+
+script NIDO_WEAPON (int which)
+{
+weaponmode=which;
 }
 
 function void setActorInventory(int tid, str name, int amount)

@@ -10,7 +10,7 @@
 #DEFINE PLAT_CAMMOVE 802
 #DEFINE PLAT_OPEN 803
 
-int campos = 0;
+global int 48: campos;
 int directions[8] = 
 {0.125, 0.25, 0.375, 0.5, 
 0.625, 0.75, 0.875, 1.0};
@@ -129,7 +129,7 @@ while(!ended)
 						{//Short hop
 						ThrustThingZ(0, 40, 0, 0);
 						}
-					if(hasJumped==3 && airtime<6 && releasedJump==0)
+					if(hasJumped==3 && airtime<6 && releasedJump==0 && CheckInventory("InHubMap")==0)
 						{//Full hop
 						ThrustThingZ(0, 20, 0, 1);
 						}

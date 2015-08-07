@@ -34,6 +34,7 @@ See:
 SLIM B 0 A_Stop
 SLIM B 5
 SLIM A 15
+SLIM A 0 A_PlaySoundEX("enemy/jump","weapon")
 SLIM B 0 A_FaceTarget
 SLIM B 0 ThrustThingZ(0, 40, 0, 0)
 SLIM B 0 A_Recoil(-8)
@@ -51,8 +52,8 @@ SLIM G 0 A_CustomMissile("BlushroomSpore", 32, 0, angle, CMF_ABSOLUTEANGLE|CMF_A
 SLIM EDE 3 A_FaceTarget
 Goto See
 Hop:
-SLIM A 0 A_PlaySoundEX("enemy/jump","Body")
 SLIM AE 3
+SLIM A 0 A_PlaySoundEX("enemy/jump","Body")
 SLIM B 0 ThrustThingZ(0, 40, 0, 0)
 SLIM B 0 A_FaceTarget
 SLIM B 0 A_Recoil(-8)

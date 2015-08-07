@@ -16,7 +16,8 @@ player/hit			HITSOUND
 player/jump			JUMP
 player/jump2		JUMP2
 
-enemy/jump			JUMP3
+enemy/jump			JUMP3 
+$volume enemy/jump 0.8
 enemy/shoot			PEWPEW
 
 pickup/health		HPGET

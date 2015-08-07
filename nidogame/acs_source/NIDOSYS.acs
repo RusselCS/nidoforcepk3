@@ -189,10 +189,6 @@ switch(garble)
 
 script NIDO_DEATH DEATH
 {
-if(weaponmode==0)
-	{
-	weaponmode=1;
-	}
 Delay(60);
 ChangeLevel("IGMCB1", 0, CHANGELEVEL_NOINTERMISSION, -1);
 }
@@ -258,17 +254,15 @@ else
 
 switch(weaponmode)
 	{
-	Case 1:
-	GiveInventory("OmegaPickup",1);
-	SetWeapon("NidoOmegaWep");
+	Case 0:
 	Break;
-	Case 2:
+	Case 1:
 	GiveInventory("BetaPickup",1);
 	SetWeapon("NidoBetaWep");
 	Break;
-	Case 3:
-	GiveInventory("AlphaPickup",1);
-	SetWeapon("NidoAlphaWep");
+	Case 2:
+	GiveInventory("OmegaPickup",1);
+	SetWeapon("OmegaBetaWep");
 	Break;
 	}
 }

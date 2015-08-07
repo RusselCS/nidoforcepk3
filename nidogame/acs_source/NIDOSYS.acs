@@ -162,6 +162,7 @@ switch(garble)
 	// [Lego] Uncertainty leads to bugs. Better to supply too much for 
 	// a simple issue than to create new issues entirely.
 	Case STATUS_HEAL:
+	Delay(1);
 	int max = GetActorProperty(0, APROP_SPAWNHEALTH);
 	int amt = GetActorProperty(0, APROP_HEALTH);
 	if(max>amt)
@@ -189,8 +190,13 @@ switch(garble)
 
 script NIDO_DEATH DEATH
 {
+if(weaponmode==0)
+	{
+	weaponmode=1;
+	}
+int num = GetLevelInfo(LEVELINFO_LEVELNUM);
 Delay(60);
-ChangeLevel("IGMCB1", 0, CHANGELEVEL_NOINTERMISSION, -1);
+ChangeLevel("IGMCHUB", num, CHANGELEVEL_NOINTERMISSION, -1);
 }
 
 script NIDO_OPEN OPEN//This script saves the number of force frags you have between worlds.
@@ -254,15 +260,17 @@ else
 
 switch(weaponmode)
 	{
-	Case 0:
-	Break;
 	Case 1:
+	GiveInventory("OmegaPickup",1);
+	SetWeapon("NidoOmegaWep");
+	Break;
+	Case 2:
 	GiveInventory("BetaPickup",1);
 	SetWeapon("NidoBetaWep");
 	Break;
-	Case 2:
-	GiveInventory("OmegaPickup",1);
-	SetWeapon("OmegaBetaWep");
+	Case 3:
+	GiveInventory("AlphaPickup",1);
+	SetWeapon("NidoAlphaWep");
 	Break;
 	}
 }

@@ -67,6 +67,7 @@ Stop
 actor BlushroomSpore
 {
 PROJECTILE
+DamageType "EnemyRadius"
 Damage (1)
 Speed 7
 Height 5

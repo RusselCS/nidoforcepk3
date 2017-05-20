@@ -11,7 +11,6 @@
 #DEFINE NIDO_DEATH 904
 #DEFINE NIDO_OPEN 905
 #DEFINE NIDO_WEAPON 906
-#DEFINE NIDO_SAVE 907
 
 #DEFINE STATUS_MAXHEALTH 1
 #DEFINE STATUS_HEAL 2
@@ -202,25 +201,6 @@ ChangeLevel("IGMCHUB", num, CHANGELEVEL_NOINTERMISSION, -1);
 
 script NIDO_OPEN OPEN//This script saves the number of force frags you have between worlds.
 {
-ACS_ExecuteAlways(NIDO_SAVE, 0, 2+(1*(GetLevelInfo(LEVELINFO_LEVELNUM)==90)));
-}
-
-script NIDO_WEAPON (int which)
-{
-weaponmode=which;
-}
-
-function void setActorInventory(int tid, str name, int amount)
-{
-int count = CheckActorInventory(tid, name);
-if(amount>count)
-	GiveActorInventory(tid, name, amount-count);
-else if(amount<count)
-	TakeActorInventory(tid, name, count-amount);
-}
-
-script NIDO_SAVE (int save)
-{
 Delay(5);
 SetActivator(1000);
 if(CheckActorInventory(1000, "ForceFrag1")>=World1Frags)
@@ -278,29 +258,33 @@ if(CheckActorInventory(1000, "CurrentLevel")>CurrentLevel)
 else
 	setActorInventory(1000, "CurrentLevel", CurrentLevel);
 
-if(save>=2)
+switch(weaponmode)
 	{
-	save-=2;
-	switch(weaponmode)
-		{
-		Case 1:
-		GiveInventory("OmegaPickup",1);
-		SetWeapon("NidoOmegaWep");
-		Break;
-		Case 2:
-		GiveInventory("BetaPickup",1);
-		SetWeapon("NidoBetaWep");
-		Break;
-		Case 3:
-		GiveInventory("AlphaPickup",1);
-		SetWeapon("NidoAlphaWep");
-		Break;
-		}
+	Case 1:
+	GiveInventory("OmegaPickup",1);
+	SetWeapon("NidoOmegaWep");
+	Break;
+	Case 2:
+	GiveInventory("BetaPickup",1);
+	SetWeapon("NidoBetaWep");
+	Break;
+	Case 3:
+	GiveInventory("AlphaPickup",1);
+	SetWeapon("NidoAlphaWep");
+	Break;
 	}
-if(save>=1)
-	{
-	SetGameProperty(GPROP_SavesEnabled, false);
-	AutoSave();
-	SetGameProperty(GPROP_SavesEnabled, true);
-	}
+}
+
+script NIDO_WEAPON (int which)
+{
+weaponmode=which;
+}
+
+function void setActorInventory(int tid, str name, int amount)
+{
+int count = CheckActorInventory(tid, name);
+if(amount>count)
+	GiveActorInventory(tid, name, amount-count);
+else if(amount<count)
+	TakeActorInventory(tid, name, count-amount);
 }
